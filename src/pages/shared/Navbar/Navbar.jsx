@@ -1,6 +1,16 @@
 import { Link, NavLink } from "react-router";
+import useHook from "../../../hooks/useHook";
 
 const Navbar = () => {
+  const {user, signOutFunc} = useHook()
+
+  const handleSignOut = () =>{
+    signOutFunc()
+    .then()
+    .catch(error=>{
+      console.log(error)
+    })
+  }
     const links = <>
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/">Home</NavLink></li>
@@ -26,7 +36,10 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Login</a>
+    {
+      user? <a onClick={handleSignOut} className="btn">SignOut</a> : 
+      <Link>Login</Link>
+    }
   </div>
 </div>
     );
