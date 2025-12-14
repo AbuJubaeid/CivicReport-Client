@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router";
 import useHook from "../../../hooks/useHook";
 import SocialLogin from "../socialLogin/SocialLogin";
 
@@ -67,6 +68,7 @@ const Register = () => {
               </fieldset>
             </form>
             <SocialLogin></SocialLogin>
+            <p className="text-center mb-2">Don't have an account? <Link className="text-blue-500"  to="/register">Register</Link></p>
           </div>
         </div>
       </div>
