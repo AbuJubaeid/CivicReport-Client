@@ -4,10 +4,10 @@ import useHook from "../../../hooks/useHook";
 import SocialLogin from "../socialLogin/SocialLogin";
 
 const Register = () => {
-    const {register, handleSubmit, formState: {errors} } = useForm()
-    const { signInWithEmailAndPasswordFunc,} = useHook()
+    const {register, handleSubmit, formState: {errors}, getValues } = useForm()
+    const { signInWithEmailAndPasswordFunc, sendPasswordResetEmailFunc} = useHook()
 
-    const handleRegister = (data) =>{
+    const handleSignin = (data) =>{
         console.log("after submit",data)
         signInWithEmailAndPasswordFunc(data.email, data.password)
         .then(result=>{
@@ -18,6 +18,22 @@ const Register = () => {
         })
 
     }
+
+    const handleForgetPassword = () =>{
+      const email = getValues("email");
+
+  if (!email) {
+    alert("Please enter your email first");
+    return;
+  }
+      sendPasswordResetEmailFunc(email)
+       .then(() => {
+      alert("Password reset email sent!");
+    })
+      .catch(error=>{
+        console.log(error)
+      })
+    }
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -26,12 +42,12 @@ const Register = () => {
             <h1 className="text-5xl font-bold">Login now!</h1>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleSubmit(handleRegister)} className="card-body">
+            <form onSubmit={handleSubmit(handleSignin)} className="card-body">
               <fieldset className="fieldset">
                 {/* email */}
                 <label className="label">Email</label>
                 <input 
-                type="email" 
+                type="email"
                 {...register('email', {required: true})} 
                 className="input" 
                 placeholder="Email" />
@@ -64,6 +80,10 @@ const Register = () => {
                         Password must have min 8, must include lowercase, uppercase, digit, special char (no spaces)
                     </p>
                 }
+                
+                <div>
+                  <a onClick={handleForgetPassword} className="link link-hover">Forgot password?</a>
+                </div>
                 <button className="btn btn-neutral mt-4">Login</button>
               </fieldset>
             </form>

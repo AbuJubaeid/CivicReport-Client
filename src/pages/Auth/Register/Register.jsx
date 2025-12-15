@@ -111,9 +111,6 @@ const Register = () => {
                         Password must have min 8, must include lowercase, uppercase, digit, special char (no spaces)
                     </p>
                 }
-                <div>
-                  <a className="link link-hover">Forgot password?</a>
-                </div>
                 <button className="btn btn-neutral mt-4">Register</button>
               </fieldset>
             </form>
