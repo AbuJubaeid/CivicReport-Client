@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router";
 import useHook from "../../../hooks/useHook";
 import SocialLogin from "../socialLogin/SocialLogin";
@@ -23,12 +24,12 @@ const Register = () => {
       const email = getValues("email");
 
   if (!email) {
-    alert("Please enter your email first");
+    toast("Please enter your email first");
     return;
   }
       sendPasswordResetEmailFunc(email)
        .then(() => {
-      alert("Password reset email sent!");
+      toast("Password reset email sent!");
     })
       .catch(error=>{
         console.log(error)

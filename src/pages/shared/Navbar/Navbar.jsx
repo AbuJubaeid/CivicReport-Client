@@ -12,8 +12,32 @@ const Navbar = () => {
     })
   }
     const links = <>
-    <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="/">Home</NavLink></li>
+    
+    {
+      user? 
+      <>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/">Home</NavLink></li>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/create-issue">Report</NavLink></li>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/about-us">About Us</NavLink></li>
+      </>
+      : 
+        <>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/">Home</NavLink></li>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/about-us">About Us</NavLink></li>
+        </>
+
+    }
+    
     </>
     return (
         <div className="navbar bg-base-100 shadow-sm">

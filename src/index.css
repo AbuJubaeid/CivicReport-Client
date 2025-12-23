@@ -9,3 +9,11 @@ body {
   font-style: normal;
   color: black;
 }
+
+.active-link {
+  color: green;
+  text-decoration: underline;
+}
+.inactive-link {
+  text-decoration: none;
+}

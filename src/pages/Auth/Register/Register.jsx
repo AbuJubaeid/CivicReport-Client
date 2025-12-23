@@ -72,7 +72,7 @@ const Register = () => {
                 className="file-input file-input-ghost" 
                 placeholder="Your Photo" />
                 {
-                    errors.email?.type === 'required' && <p className="text-red-500">Photo is required</p>
+                    errors.photo?.type === 'required' && <p className="text-red-500">Photo is required</p>
                 }
 
                 {/* email */}
