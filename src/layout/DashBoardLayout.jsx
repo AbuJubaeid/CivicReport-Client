@@ -1,8 +1,9 @@
+import { TbReport } from "react-icons/tb";
 import { Link, NavLink, Outlet } from "react-router";
 
 const DashBoardLayout = () => {
     return (
-        <div className="drawer lg:drawer-open">
+        <div className="drawer lg:drawer-open max-w-[900px] mx-auto">
   <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content">
     {/* Navbar */}
@@ -35,8 +36,12 @@ const DashBoardLayout = () => {
         {/* my dashboard links */}
         <li>
             <NavLink className={({ isActive }) =>
-                  isActive ? "active-link" : "inactive-link"
-                } to="/dashboard/my-reports">My Reports</NavLink>
+    `${isActive ? "active-link" : "inactive-link"} is-drawer-close tooltip tooltip-right`
+  }
+                data-tip="MyReports" 
+                to="/dashboard/my-reports">
+                <TbReport />
+                <span className="is-drawer-close:hidden">My Reports</span></NavLink>
         </li>
 
         {/* List item */}
