@@ -85,7 +85,7 @@ const CreateIssue = () => {
             <label className="label">Category</label>
             <select 
             defaultValue="Pick a category"
-            {...register('select', {required: true})} 
+            {...register('category', {required: true})} 
             className="select">
               <option disabled={true}>Pick a category</option>
               <option>Crimson</option>
