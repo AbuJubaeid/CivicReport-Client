@@ -6,6 +6,7 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import CreateIssue from "../pages/CreateIssue/CreateIssue";
 import MyReports from "../pages/DashBoard/MyReports/MyReports";
+import Payment from "../pages/DashBoard/Payment/Payment";
 import Home from "../pages/Home/Home/Home";
 import PrivateRoute from "./PrivateRoute";
 
@@ -43,7 +44,11 @@ export const router = createBrowserRouter([
       {
         path: 'my-reports',
         Component: MyReports
-      }
+      },
+      {
+        path: 'payment/:reportId',
+        Component: Payment
+      },
     ]
   }
 ]);

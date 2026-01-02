@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaRegEdit } from "react-icons/fa";
 import { GrFormView } from "react-icons/gr";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { Link } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useHook from "../../../hooks/useHook";
@@ -57,6 +58,8 @@ const MyReports = () => {
               <th>Report Name</th>
               <th>Category</th>
               <th>Location</th>
+              <th>Status</th>
+              <th>Priority</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -67,6 +70,14 @@ const MyReports = () => {
                 <td>{report.issue}</td>
                 <td>{report.category}</td>
                 <td>{report.location}</td>
+                <td>Pending</td>
+                <td>
+                    {
+                        report.priorityStatus === 'boosted' ? 
+                        <span className="text-gray-400">Paid</span> : 
+                        <Link to={`/dashboard/payment/${report._id}`} className="btn btn-secondary text-sm">Boost</Link>
+                    }
+                </td>
                 <td>
                   <button className="btn btn-square hover:bg-secondary">
                     <GrFormView />
