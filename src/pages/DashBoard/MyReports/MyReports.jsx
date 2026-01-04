@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { FaRegEdit } from "react-icons/fa";
 import { GrFormView } from "react-icons/gr";
 import { MdOutlineDeleteForever } from "react-icons/md";
-import { Link } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useHook from "../../../hooks/useHook";
@@ -46,6 +45,18 @@ const MyReports = () => {
     });
   };
 
+  const handlePayment = async(report)=>{
+        const paymentInfo = {
+            issue: report.issue,
+            reportId: report._id,
+            email: report.email,
+        }
+
+        const res = await axiosSecure.post('/create-checkout-session', paymentInfo)
+        console.log(res.data)
+        window.location.assign(res.data.url ) 
+    }
+
   return (
     <div>
       <h2>My reports are here: {reports.length}</h2>
@@ -75,7 +86,7 @@ const MyReports = () => {
                     {
                         report.priorityStatus === 'boosted' ? 
                         <span className="text-gray-400">Paid</span> : 
-                        <Link to={`/dashboard/payment/${report._id}`} className="btn btn-secondary text-sm">Boost</Link>
+                        <button onClick={()=>handlePayment(report)} className="btn btn-secondary text-sm">Boost</button>
                     }
                 </td>
                 <td>

@@ -6,7 +6,6 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import CreateIssue from "../pages/CreateIssue/CreateIssue";
 import MyReports from "../pages/DashBoard/MyReports/MyReports";
-import Payment from "../pages/DashBoard/Payment/Payment";
 import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
 import Home from "../pages/Home/Home/Home";
@@ -47,10 +46,10 @@ export const router = createBrowserRouter([
         path: 'my-reports',
         Component: MyReports
       },
-      {
-        path: 'payment/:reportId',
-        Component: Payment
-      },
+      // {
+      //   path: 'payment/:reportId',
+      //   Component: Payment
+      // },
       {
         path: 'payment-success',
         Component: PaymentSuccess
