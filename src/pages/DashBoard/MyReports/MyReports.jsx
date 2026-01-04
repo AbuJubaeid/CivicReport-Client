@@ -84,8 +84,8 @@ const MyReports = () => {
                 <td>Pending</td>
                 <td>
                     {
-                        report.priorityStatus === 'boosted' ? 
-                        <span className="text-gray-400">Paid</span> : 
+                        report.paymentStatus === 'paid' ? 
+                        <span className="text-gray-400">Boosted</span> : 
                         <button onClick={()=>handlePayment(report)} className="btn btn-secondary text-sm">Boost</button>
                     }
                 </td>
