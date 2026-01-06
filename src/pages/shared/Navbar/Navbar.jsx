@@ -26,10 +26,16 @@ const Navbar = () => {
       <>
         <li><NavLink className={({ isActive }) =>
                   isActive ? "active-link" : "inactive-link"
-                } to="/create-issue">Create Report</NavLink></li>
+                } to="/create-issue">Create Report</NavLink>
+        </li>
         <li><NavLink className={({ isActive }) =>
                   isActive ? "active-link" : "inactive-link"
-                } to="/dashboard/my-reports">My Reports</NavLink></li>
+                } to="/dashboard/my-reports">My Reports</NavLink>
+        </li>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/dashboard/payment-history">Payment History</NavLink>
+        </li>
 
       </>
 
