@@ -36,6 +36,10 @@ const Navbar = () => {
                   isActive ? "active-link" : "inactive-link"
                 } to="/dashboard/payment-history">Payment History</NavLink>
         </li>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/staff">Be a staff</NavLink>
+        </li>
 
       </>
 
@@ -56,7 +60,7 @@ const Navbar = () => {
         {links}
       </ul>
     </div>
-    <Link to="/" ><span className="text-2xl font-bold">CivicReport</span></Link>
+    <Link to="/" className="text-2xl font-bold" >CivicReport</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">

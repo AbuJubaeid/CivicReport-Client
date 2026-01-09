@@ -100,6 +100,20 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "active-link" : "inactive-link"
+                  } is-drawer-close tooltip tooltip-right`
+                }
+                data-tip="Approve staff"
+                to="/dashboard/approve-staff"
+              >
+                <LiaCreditCardSolid />
+                <span className="is-drawer-close:hidden">Approve Staff</span>
+              </NavLink>
+            </li>
 
             {/* List item */}
             <li>

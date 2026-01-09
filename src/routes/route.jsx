@@ -10,6 +10,7 @@ import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
 import PaymentHistory from "../pages/DashBoard/PaymentHistory/PaymentHistory";
 import Home from "../pages/Home/Home/Home";
+import Staff from "../pages/Staff/Staff";
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
         {
           path: 'about-us',
           Component: AboutUs
+        },
+        {
+          path: 'staff',
+          element: <PrivateRoute><Staff></Staff></PrivateRoute>
         },
     ]
   },
