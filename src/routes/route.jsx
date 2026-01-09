@@ -5,6 +5,7 @@ import AboutUs from "../pages/AboutUs/AboutUs";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import CreateIssue from "../pages/CreateIssue/CreateIssue";
+import ApproveStaffs from "../pages/DashBoard/ApproveStaffs/ApproveStaffs";
 import MyReports from "../pages/DashBoard/MyReports/MyReports";
 import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         path: 'payment-history',
         Component: PaymentHistory
+      },
+      {
+        path: 'approve-staff',
+        Component: ApproveStaffs
       },
     ]
   }

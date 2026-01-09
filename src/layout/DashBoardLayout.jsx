@@ -1,4 +1,5 @@
 import { LiaCreditCardSolid } from "react-icons/lia";
+import { MdOutlinePersonSearch } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
 import { Link, NavLink, Outlet } from "react-router";
 
@@ -110,7 +111,7 @@ const DashBoardLayout = () => {
                 data-tip="Approve staff"
                 to="/dashboard/approve-staff"
               >
-                <LiaCreditCardSolid />
+                <MdOutlinePersonSearch />
                 <span className="is-drawer-close:hidden">Approve Staff</span>
               </NavLink>
             </li>
