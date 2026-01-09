@@ -1,12 +1,23 @@
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useHook from "../../../hooks/useHook";
 
 const SocialLogin = () => {
     const {signInWithPopupFunc} = useHook()
+    const axiosSecure = useAxiosSecure()
 
     const handleGoogleSignIn = () =>{
         signInWithPopupFunc()
         .then(result=>{
             console.log(result.user)
+            // create user in the database
+          const userInfo = {
+            email: result.user.email,
+            displayName: result.user.name,
+            photoURL: result.user.photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+              console.log("user created in the database", res.data);
+          });
         })
         .catch(error=>{
             console.log(error)
