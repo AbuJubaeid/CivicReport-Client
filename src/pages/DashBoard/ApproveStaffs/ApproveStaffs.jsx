@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaTrashAlt, FaUserCheck } from "react-icons/fa";
 import { IoPersonRemove } from "react-icons/io5";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ApproveStaffs = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: staffs = [] } = useQuery({
+  const { refetch, data: staffs = [] } = useQuery({
     queryKey: ["staffs", "pending"],
     queryFn: async () => {
       const res = await axiosSecure.get("/staffs");
@@ -13,9 +14,51 @@ const ApproveStaffs = () => {
     },
   });
 
-  const handleApprove = id =>{
-    console.log(id)
-    }
+  const updateStaffInfo = (id, status) =>{
+
+    const updateInfo = { status: status };
+    axiosSecure.patch(`/staffs/${id}`, updateInfo).then((res) => {
+      if (res.data.modifiedCount) {
+        refetch()
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title:
+            "Staff request approved",
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      }
+    });
+  }
+  const handleApprove = (id) => {
+    updateStaffInfo(id, 'approved') 
+  };
+
+  const handleReject = id =>{
+    updateStaffInfo(id, 'rejected')
+  }
+
+    const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/staffs/${id}`)
+          .then((res) => {
+            if(res.data.deletedCount){
+              Swal.fire("Deleted!", "Your product has been deleted.", "success");
+            }
+          })
+      }
+    });
+  };
 
   return (
     <div>
@@ -34,22 +77,33 @@ const ApproveStaffs = () => {
             </tr>
           </thead>
           <tbody>
-            {staffs.map((staff, index)=><tr>
-              <th>{index + 1}</th>
-              <td>{staff.name}</td>
-              <td>{staff.email}</td>
-              <td>{staff.address}</td>
-              <td>{staff.status}</td>
-              <td>
-                <button
-                 onClick={()=>handleApprove(staff._id)}
-                 className="btn"><FaUserCheck /></button>
-                <button className="btn"><IoPersonRemove /></button>
-                <button className="btn"><FaTrashAlt /></button>
-              </td>
-            </tr>)}
-            
-            
+            {staffs.map((staff, index) => (
+              <tr>
+                <th>{index + 1}</th>
+                <td>{staff.name}</td>
+                <td>{staff.email}</td>
+                <td>{staff.address}</td>
+                <td className={`${staff.status === 'approved' ? 'text-green-500' : 'text-red-500'}`}>{staff.status}</td>
+                <td>
+                  <button
+                    onClick={() => handleApprove(staff._id)}
+                    className="btn"
+                  >
+                    <FaUserCheck />
+                  </button>
+                  <button
+                    onClick={()=>handleReject(staff._id)}
+                    className="btn">
+                    <IoPersonRemove />
+                  </button>
+                  <button
+                   onClick={()=>handleDelete(staff._id)}
+                   className="btn">
+                    <FaTrashAlt />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
