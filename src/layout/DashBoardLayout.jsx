@@ -1,3 +1,4 @@
+import { GrUserManager } from "react-icons/gr";
 import { LiaCreditCardSolid } from "react-icons/lia";
 import { MdOutlinePersonSearch } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
@@ -113,6 +114,22 @@ const DashBoardLayout = () => {
               >
                 <MdOutlinePersonSearch />
                 <span className="is-drawer-close:hidden">Approve Staff</span>
+              </NavLink>
+            </li>
+
+            {/* user manager */}
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "active-link" : "inactive-link"
+                  } is-drawer-close tooltip tooltip-right`
+                }
+                data-tip="User Manager"
+                to="/dashboard/user-manager"
+              >
+                <GrUserManager />
+                <span className="is-drawer-close:hidden">User Manager</span>
               </NavLink>
             </li>
 

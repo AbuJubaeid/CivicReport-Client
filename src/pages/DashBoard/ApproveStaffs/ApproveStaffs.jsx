@@ -52,8 +52,10 @@ const ApproveStaffs = () => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/staffs/${id}`)
           .then((res) => {
+            console.log("data deleted from staff",res.data)
             if(res.data.deletedCount){
-              Swal.fire("Deleted!", "Your product has been deleted.", "success");
+              refetch()
+              Swal.fire("Deleted!", "Staff request has been deleted.", "success");
             }
           })
       }
