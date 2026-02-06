@@ -1,15 +1,74 @@
 import { useQuery } from "@tanstack/react-query";
+import { FaUserShield } from "react-icons/fa";
+import { GiShieldDisabled } from "react-icons/gi";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const UserManager = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: users = [] } = useQuery({
+  const { refetch,  data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/users`);
       return res.data;
-    },
+    }
   });
+
+  const handleMakeUser = user =>{
+        Swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, make his/her admin",
+            }).then(() => {
+              const roleInfo = { role: "admin"}
+        axiosSecure.patch(`/users/${user._id}`, roleInfo)
+        .then(res=>{
+            if(res.data.modifiedCount){
+                refetch()
+                Swal.fire({
+                          position: "top-end",
+                          icon: "success",
+                          title:
+                            `${user.displayName} marked as an admin`,
+                          showConfirmButton: false,
+                          timer: 2500,
+                        });
+            }
+        })
+            });
+    }
+
+    const handleRemoveAdmin = user =>{
+        Swal.fire({
+              title: "Are you sure?",
+              text: "You won't be able to revert this!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Yes, remove him/her!",
+            }).then(() => {
+              const roleInfo = { role: "user"}
+        axiosSecure.patch(`/users/${user._id}`, roleInfo)
+        .then(res=>{
+            if(res.data.modifiedCount){
+                refetch()
+                Swal.fire({
+                          position: "top-end",
+                          icon: "success",
+                          title:
+                            `${user.displayName} removed from admin`,
+                          showConfirmButton: false,
+                          timer: 2500,
+                        });
+            }
+        })
+            });
+    }
 
   return (
     <div>
@@ -25,7 +84,7 @@ const UserManager = () => {
               <th>User</th>
               <th>Email</th>
               <th>Role</th>
-              <th>Action</th>
+              <th>Admin Action</th>
             </tr>
           </thead>
           <tbody>
@@ -55,7 +114,14 @@ const UserManager = () => {
               </td>
               <td>{user.role}</td>
               <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                {user.role === "admin" ? 
+                <button 
+                onClick={()=> handleRemoveAdmin(user)}
+                className="btn"><GiShieldDisabled /></button> : 
+                <button
+                 onClick={()=> handleMakeUser(user)}
+                 className="btn"><FaUserShield /></button>
+                }
               </th>
             </tr>
             )}

@@ -3,8 +3,11 @@ import { LiaCreditCardSolid } from "react-icons/lia";
 import { MdOutlinePersonSearch } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
 import { Link, NavLink, Outlet } from "react-router";
+import useRole from "../hooks/useRole";
 
 const DashBoardLayout = () => {
+  const {role} = useRole()
+
   return (
     <div className="drawer lg:drawer-open max-w-[900px] mx-auto">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -102,6 +105,11 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+
+            {
+              role === 'admin' &&
+              <>
+              {/* approve staff */}
             <li>
               <NavLink
                 className={({ isActive }) =>
@@ -132,6 +140,8 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">User Manager</span>
               </NavLink>
             </li>
+              </>
+            }
 
             {/* List item */}
             <li>

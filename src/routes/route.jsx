@@ -13,6 +13,7 @@ import PaymentHistory from "../pages/DashBoard/PaymentHistory/PaymentHistory";
 import UserManager from "../pages/DashBoard/UserManager/UserManager";
 import Home from "../pages/Home/Home/Home";
 import Staff from "../pages/Staff/Staff";
+import AdminOnlyRoute from "./AdminOnlyRoute";
 import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
@@ -72,11 +73,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'approve-staff',
-        Component: ApproveStaffs
+        element: <AdminOnlyRoute><ApproveStaffs></ApproveStaffs></AdminOnlyRoute>
       },
       {
         path: 'user-manager',
-        Component: UserManager
+        element: <AdminOnlyRoute><UserManager></UserManager></AdminOnlyRoute>
       },
     ]
   }
