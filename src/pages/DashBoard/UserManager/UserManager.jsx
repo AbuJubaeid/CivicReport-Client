@@ -14,7 +14,7 @@ const UserManager = () => {
     }
   });
 
-  const handleMakeUser = user =>{
+  const handleMakeAdmin = user =>{
         Swal.fire({
               title: "Are you sure?",
               text: "You won't be able to revert this!",
@@ -25,7 +25,7 @@ const UserManager = () => {
               confirmButtonText: "Yes, make his/her admin",
             }).then(() => {
               const roleInfo = { role: "admin"}
-        axiosSecure.patch(`/users/${user._id}`, roleInfo)
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo)
         .then(res=>{
             if(res.data.modifiedCount){
                 refetch()
@@ -53,7 +53,7 @@ const UserManager = () => {
               confirmButtonText: "Yes, remove him/her!",
             }).then(() => {
               const roleInfo = { role: "user"}
-        axiosSecure.patch(`/users/${user._id}`, roleInfo)
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo)
         .then(res=>{
             if(res.data.modifiedCount){
                 refetch()
@@ -119,7 +119,7 @@ const UserManager = () => {
                 onClick={()=> handleRemoveAdmin(user)}
                 className="btn"><GiShieldDisabled /></button> : 
                 <button
-                 onClick={()=> handleMakeUser(user)}
+                 onClick={()=> handleMakeAdmin(user)}
                  className="btn"><FaUserShield /></button>
                 }
               </th>
