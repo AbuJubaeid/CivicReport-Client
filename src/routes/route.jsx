@@ -11,11 +11,13 @@ import MyReports from "../pages/DashBoard/MyReports/MyReports";
 import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
 import PaymentHistory from "../pages/DashBoard/PaymentHistory/PaymentHistory";
+import StaffTask from "../pages/DashBoard/StaffTask/StaffTask";
 import UserManager from "../pages/DashBoard/UserManager/UserManager";
 import Home from "../pages/Home/Home/Home";
 import Staff from "../pages/Staff/Staff";
 import AdminOnlyRoute from "./AdminOnlyRoute";
 import PrivateRoute from "./PrivateRoute";
+import StaffOnlyRoute from "./StaffOnlyRoute";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +74,14 @@ export const router = createBrowserRouter([
         path: 'payment-history',
         Component: PaymentHistory
       },
+
+      // staff route only
+      {
+        path: 'staff-task',
+        element: <StaffOnlyRoute><StaffTask></StaffTask></StaffOnlyRoute>
+      },
+
+      // admin route only
       {
         path: 'approve-staff',
         element: <AdminOnlyRoute><ApproveStaffs></ApproveStaffs></AdminOnlyRoute>

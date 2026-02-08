@@ -1,3 +1,4 @@
+import { FaTasks } from "react-icons/fa";
 import { GrUserManager } from "react-icons/gr";
 import { LiaCreditCardSolid } from "react-icons/lia";
 import { MdOutlineAssignmentInd, MdOutlinePersonSearch } from "react-icons/md";
@@ -6,7 +7,7 @@ import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
 
 const DashBoardLayout = () => {
-  const {role} = useRole()
+  const { role } = useRole();
 
   return (
     <div className="drawer lg:drawer-open max-w-[900px] mx-auto">
@@ -105,59 +106,81 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+            {/* role based task start here */}
+
+            {role === "admin" && (
+              <>
+                {/* approve staff */}
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    data-tip="Approve staff"
+                    to="/dashboard/approve-staff"
+                  >
+                    <MdOutlinePersonSearch />
+                    <span className="is-drawer-close:hidden">
+                      Approve Staff
+                    </span>
+                  </NavLink>
+                </li>
+
+                {/* assign staff */}
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    data-tip="Assign staff"
+                    to="/dashboard/assign-staff"
+                  >
+                    <MdOutlineAssignmentInd />
+                    <span className="is-drawer-close:hidden">Assign Staff</span>
+                  </NavLink>
+                </li>
+
+                {/* user manager */}
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    data-tip="User Manager"
+                    to="/dashboard/user-manager"
+                  >
+                    <GrUserManager />
+                    <span className="is-drawer-close:hidden">User Manager</span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {
-              role === 'admin' &&
+              role === 'staff' && (
               <>
-              {/* approve staff */}
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "active-link" : "inactive-link"
-                  } is-drawer-close tooltip tooltip-right`
-                }
-                data-tip="Approve staff"
-                to="/dashboard/approve-staff"
-              >
-                <MdOutlinePersonSearch />
-                <span className="is-drawer-close:hidden">Approve Staff</span>
-              </NavLink>
-            </li>
-
-            {/* assign staff */}
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "active-link" : "inactive-link"
-                  } is-drawer-close tooltip tooltip-right`
-                }
-                data-tip="Assign staff"
-                to="/dashboard/assign-staff"
-              >
-                <MdOutlineAssignmentInd />
-                <span className="is-drawer-close:hidden">Assign Staff</span>
-              </NavLink>
-            </li>
-
-            {/* user manager */}
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  `${
-                    isActive ? "active-link" : "inactive-link"
-                  } is-drawer-close tooltip tooltip-right`
-                }
-                data-tip="User Manager"
-                to="/dashboard/user-manager"
-              >
-                <GrUserManager />
-                <span className="is-drawer-close:hidden">User Manager</span>
-              </NavLink>
-            </li>
+              <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    data-tip="Staff Task"
+                    to="/dashboard/staff-task"
+                  >
+                    <FaTasks />
+                    <span className="is-drawer-close:hidden">Staff Task</span>
+                  </NavLink>
+                </li>
               </>
-            }
+            )}
 
             {/* List item */}
             <li>

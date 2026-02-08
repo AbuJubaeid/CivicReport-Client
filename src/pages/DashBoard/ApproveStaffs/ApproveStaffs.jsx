@@ -14,10 +14,10 @@ const ApproveStaffs = () => {
     },
   });
 
-  const updateStaffInfo = (id, status) =>{
+  const updateStaffInfo = (staff, status) =>{
 
-    const updateInfo = { status: status };
-    axiosSecure.patch(`/staffs/${id}`, updateInfo).then((res) => {
+    const updateInfo = { status: status, email: staff.email };
+    axiosSecure.patch(`/staffs/${staff._id}`, updateInfo).then((res) => {
       if (res.data.modifiedCount) {
         refetch()
         Swal.fire({
@@ -31,12 +31,12 @@ const ApproveStaffs = () => {
       }
     });
   }
-  const handleApprove = (id) => {
-    updateStaffInfo(id, 'approved') 
+  const handleApprove = (staff) => {
+    updateStaffInfo(staff, 'approved') 
   };
 
-  const handleReject = id =>{
-    updateStaffInfo(id, 'rejected')
+  const handleReject = staff =>{
+    updateStaffInfo(staff, 'rejected')
   }
 
     const handleDelete = (id) => {
@@ -90,13 +90,13 @@ const ApproveStaffs = () => {
                 <td>{staff.workStatus}</td>
                 <td>
                   <button
-                    onClick={() => handleApprove(staff._id)}
+                    onClick={() => handleApprove(staff)}
                     className="btn"
                   >
                     <FaUserCheck />
                   </button>
                   <button
-                    onClick={()=>handleReject(staff._id)}
+                    onClick={()=>handleReject(staff)}
                     className="btn">
                     <IoPersonRemove />
                   </button>
