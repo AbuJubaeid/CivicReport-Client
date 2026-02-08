@@ -24,7 +24,7 @@ const ApproveStaffs = () => {
           position: "top-end",
           icon: "success",
           title:
-            "Staff request approved",
+            "Staff status changed",
           showConfirmButton: false,
           timer: 2500,
         });
@@ -75,6 +75,7 @@ const ApproveStaffs = () => {
               <th>Email</th>
               <th>Location</th>
               <th>Status</th>
+              <th>Work Status</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -86,6 +87,7 @@ const ApproveStaffs = () => {
                 <td>{staff.email}</td>
                 <td>{staff.address}</td>
                 <td className={`${staff.status === 'approved' ? 'text-green-500' : 'text-red-500'}`}>{staff.status}</td>
+                <td>{staff.workStatus}</td>
                 <td>
                   <button
                     onClick={() => handleApprove(staff._id)}

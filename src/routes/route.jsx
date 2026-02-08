@@ -6,6 +6,7 @@ import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import CreateIssue from "../pages/CreateIssue/CreateIssue";
 import ApproveStaffs from "../pages/DashBoard/ApproveStaffs/ApproveStaffs";
+import AssignStaff from "../pages/DashBoard/AssignStaff/AssignStaff";
 import MyReports from "../pages/DashBoard/MyReports/MyReports";
 import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
@@ -74,6 +75,10 @@ export const router = createBrowserRouter([
       {
         path: 'approve-staff',
         element: <AdminOnlyRoute><ApproveStaffs></ApproveStaffs></AdminOnlyRoute>
+      },
+      {
+        path: 'assign-staff',
+        element: <AdminOnlyRoute><AssignStaff></AssignStaff></AdminOnlyRoute>
       },
       {
         path: 'user-manager',

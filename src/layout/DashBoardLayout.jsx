@@ -1,6 +1,6 @@
 import { GrUserManager } from "react-icons/gr";
 import { LiaCreditCardSolid } from "react-icons/lia";
-import { MdOutlinePersonSearch } from "react-icons/md";
+import { MdOutlineAssignmentInd, MdOutlinePersonSearch } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
@@ -122,6 +122,22 @@ const DashBoardLayout = () => {
               >
                 <MdOutlinePersonSearch />
                 <span className="is-drawer-close:hidden">Approve Staff</span>
+              </NavLink>
+            </li>
+
+            {/* assign staff */}
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `${
+                    isActive ? "active-link" : "inactive-link"
+                  } is-drawer-close tooltip tooltip-right`
+                }
+                data-tip="Assign staff"
+                to="/dashboard/assign-staff"
+              >
+                <MdOutlineAssignmentInd />
+                <span className="is-drawer-close:hidden">Assign Staff</span>
               </NavLink>
             </li>
 

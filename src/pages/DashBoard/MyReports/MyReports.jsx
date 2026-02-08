@@ -81,7 +81,7 @@ const MyReports = () => {
                 <td>{report.issue}</td>
                 <td>{report.category}</td>
                 <td>{report.location}</td>
-                <td>Pending</td>
+                <td>{report.reportStatus}</td>
                 <td>
                     {
                         report.paymentStatus === 'paid' ? 
