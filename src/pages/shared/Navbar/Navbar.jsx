@@ -19,6 +19,9 @@ const Navbar = () => {
         <li><NavLink className={({ isActive }) =>
                   isActive ? "active-link" : "inactive-link"
                 } to="/about-us">About Us</NavLink></li>
+        <li><NavLink className={({ isActive }) =>
+                  isActive ? "active-link" : "inactive-link"
+                } to="/impact">Impact</NavLink></li>
     </>
     
     {
