@@ -1,7 +1,7 @@
 import { FaTasks } from "react-icons/fa";
 import { GrUserManager } from "react-icons/gr";
 import { LiaCreditCardSolid } from "react-icons/lia";
-import { MdOutlineAssignmentInd, MdOutlinePersonSearch } from "react-icons/md";
+import { MdOutlineAssignmentInd, MdOutlinePersonSearch, MdOutlineTaskAlt } from "react-icons/md";
 import { TbReport } from "react-icons/tb";
 import { Link, NavLink, Outlet } from "react-router";
 import useRole from "../hooks/useRole";
@@ -177,6 +177,22 @@ const DashBoardLayout = () => {
                   >
                     <FaTasks />
                     <span className="is-drawer-close:hidden">Staff Task</span>
+                  </NavLink>
+                </li>
+
+                {/* completed report */}
+              <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    data-tip="Completed Report"
+                    to="/dashboard/completed-report"
+                  >
+                    <MdOutlineTaskAlt />
+                    <span className="is-drawer-close:hidden">Completed Report</span>
                   </NavLink>
                 </li>
               </>

@@ -7,6 +7,7 @@ import Register from "../pages/Auth/Register/Register";
 import CreateIssue from "../pages/CreateIssue/CreateIssue";
 import ApproveStaffs from "../pages/DashBoard/ApproveStaffs/ApproveStaffs";
 import AssignStaff from "../pages/DashBoard/AssignStaff/AssignStaff";
+import CompletedReport from "../pages/DashBoard/CompletedReport/CompletedReport";
 import MyReports from "../pages/DashBoard/MyReports/MyReports";
 import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
       {
         path: 'staff-task',
         element: <StaffOnlyRoute><StaffTask></StaffTask></StaffOnlyRoute>
+      },
+      {
+        path: 'completed-report',
+        element: <StaffOnlyRoute><CompletedReport></CompletedReport></StaffOnlyRoute>
       },
 
       // admin route only

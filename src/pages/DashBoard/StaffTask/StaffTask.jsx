@@ -13,8 +13,12 @@ const StaffTask = () => {
       return res.data;
     },
   });
-  const handleReport = report =>{
-    const statusInfo = { reportStatus: 'Processing'}
+  const handleStatusUpdate = (report, status) =>{
+    const statusInfo = { 
+      reportStatus: status,
+      staffId: report.staffId,
+      }
+
     axiosSecure.patch(`/reports/${report._id}/status`, statusInfo)
     .then(res=>{
       if(res.data.modifiedCount){
@@ -23,7 +27,7 @@ const StaffTask = () => {
                               position: "top-end",
                               icon: "success",
                               title:
-                                "Thank you for accepting",
+                                "Report status updated",
                               showConfirmButton: false,
                               timer: 2500,
                             });
@@ -32,10 +36,9 @@ const StaffTask = () => {
   }
   return (
     <div>
-      <h2>Pending reports: {reports.length}</h2>
+      <h2>Reports: {reports.length}</h2>
       <div className="overflow-x-auto">
         <table className="table table-zebra">
-          {/* head */}
           <thead>
             <tr>
               <th></th>
@@ -57,7 +60,7 @@ const StaffTask = () => {
                   report.reportStatus === "In-Progress" ? 
                   <>
                   <button
-                onClick={()=>handleReport(report)} 
+                onClick={()=>handleStatusUpdate(report, 'Processing')} 
                 className="btn btn-primary">Accept</button>
                 <button className="btn btn-warning">Reject</button>
                   </>
@@ -65,7 +68,14 @@ const StaffTask = () => {
                   <span> Report Acccepted</span>
                 }
               </td>
-              <td></td>
+              <td>
+                <button
+                onClick={()=>handleStatusUpdate(report, 'Marked')} 
+                className="btn btn-primary">Marked</button>
+                <button 
+                onClick={()=>handleStatusUpdate(report, 'Solved')} 
+                className="btn btn-warning">Solved</button>
+              </td>
             </tr>)}
             
           </tbody>
