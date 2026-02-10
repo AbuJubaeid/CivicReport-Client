@@ -2,7 +2,9 @@ import Banner from "../Banner";
 import FAQ from "../FAQ";
 import HowItWorks from "../HowItWorks";
 import KeyFeatures from "../KeyFeatures";
+import LatestResolvedReports from "../LatestResolvedReports";
 import OurMission from "../OurMission";
+import RecentReports from "../RecentReports";
 import WCAS from "../WCAS";
 
 
@@ -20,6 +22,12 @@ const Home = () => {
       </div>
       <div>
         <HowItWorks></HowItWorks>
+      </div>
+      <div>
+        <RecentReports></RecentReports>
+      </div>
+      <div>
+        <LatestResolvedReports></LatestResolvedReports>
       </div>
       <div>
         <WCAS></WCAS>
