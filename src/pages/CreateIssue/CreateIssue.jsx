@@ -25,7 +25,19 @@ const CreateIssue = () => {
       import.meta.env.VITE_imageHostApiKey
     }`;
 
-    axios.post(imageApiURL, formData).then(() => {
+    axios.post(imageApiURL, formData).then((res) => {
+      const photoURL = res.data.data.url;
+
+          // send photoUrl in the database
+          const reportInfo = {
+            photoURL: photoURL,
+            name: data.name,
+            email: data.email,
+            issue: data.issue,
+            category: data.category,
+            location: data.location,
+            createdAt: data.createdAt,
+          };
       Swal.fire({
         title: "Confirm submission",
         text: "Do you want to create this report?",
@@ -34,7 +46,7 @@ const CreateIssue = () => {
         confirmButtonText: "Yes, submit",
       }).then((result) => {
         if (result.isConfirmed) {
-          axiosSecure.post("/reports", data).then((res) => {
+          axiosSecure.post("/reports", reportInfo).then((res) => {
             if (res.data.insertedId) {
               navigate("/dashboard/my-reports");
               Swal.fire({
