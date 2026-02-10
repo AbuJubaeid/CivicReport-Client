@@ -1,4 +1,17 @@
+import { useNavigate } from "react-router";
+import useHook from "../../../hooks/useHook";
+
 const Home = () => {
+  const { user } = useHook()
+  const navigate = useNavigate()
+
+  const handleReportIssue = () => {
+  if (!user) {
+    navigate("/login");
+  } else {
+    navigate("/create-issue");
+  }
+};
   return (
     <div className="bg-slate-50">
 
@@ -24,11 +37,15 @@ const Home = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <button className="btn bg-slate-800 hover:bg-slate-900 text-white border-none px-8">
+              <button 
+              onClick={handleReportIssue}
+              className="btn bg-slate-800 hover:bg-slate-900 text-white border-none px-8">
                 Report an Issue
               </button>
-              <button className="btn btn-outline border-slate-400 text-slate-700 hover:bg-slate-200 px-8">
-                Learn More
+              <button
+              onClick={()=>navigate("/all-report")}
+               className="btn btn-outline border-slate-400 text-slate-700 hover:bg-slate-200 px-8">
+                See All Reports
               </button>
             </div>
           </div>

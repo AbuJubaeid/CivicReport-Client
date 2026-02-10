@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import DashBoardLayout from "../layout/DashBoardLayout";
 import RootLayout from "../layout/RootLayout";
 import AboutUs from "../pages/AboutUs/AboutUs";
+import AllReport from "../pages/AllReport/AllReport";
 import Login from "../pages/Auth/Login/Login";
 import Register from "../pages/Auth/Register/Register";
 import CreateIssue from "../pages/CreateIssue/CreateIssue";
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
         {
           path: 'create-issue',
           element: <PrivateRoute><CreateIssue></CreateIssue></PrivateRoute>
+        },
+        {
+          path: 'all-report',
+          element: <AllReport></AllReport>
         },
         {
           path: 'about-us',
