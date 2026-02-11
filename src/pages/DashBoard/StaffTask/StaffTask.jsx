@@ -61,7 +61,7 @@ const StaffTask = () => {
                   <>
                   <button
                 onClick={()=>handleStatusUpdate(report, 'Processing')} 
-                className="btn btn-primary">Accept</button>
+                className="btn btn-primary mr-2">Accept</button>
                 <button className="btn btn-warning">Reject</button>
                   </>
                   : 
@@ -71,7 +71,7 @@ const StaffTask = () => {
               <td>
                 <button
                 onClick={()=>handleStatusUpdate(report, 'Marked')} 
-                className="btn btn-primary">Marked</button>
+                className="btn btn-primary mr-2">Marked</button>
                 <button 
                 onClick={()=>handleStatusUpdate(report, 'Solved')} 
                 className="btn btn-warning">Solved</button>
@@ -86,3 +86,4 @@ const StaffTask = () => {
 };
 
 export default StaffTask;
+
