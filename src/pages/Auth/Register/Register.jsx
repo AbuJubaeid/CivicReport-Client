@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -51,7 +52,7 @@ const Register = () => {
 
           axiosSecure.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
-              console.log("user created in the database");
+              toast("user created successfully");
             }
           });
 

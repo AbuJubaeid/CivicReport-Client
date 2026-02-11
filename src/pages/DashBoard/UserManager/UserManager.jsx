@@ -7,7 +7,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const UserManager = () => {
   const axiosSecure = useAxiosSecure();
-  const [searchUser, setSearchUser] = useState()
+  const [searchUser, setSearchUser] = useState("");
+
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users", searchUser],
     queryFn: async () => {
@@ -24,21 +25,23 @@ const UserManager = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, make his/her admin",
-    }).then(() => {
-      const roleInfo = { role: "admin" };
-      axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
-        if (res.data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${user.displayName} marked as an admin`,
-            showConfirmButton: false,
-            timer: 2500,
-          });
-        }
-      });
+      confirmButtonText: "Yes, make admin",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const roleInfo = { role: "admin" };
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
+          if (res.data.modifiedCount) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${user.displayName} marked as an admin`,
+              showConfirmButton: false,
+              timer: 2500,
+            });
+          }
+        });
+      }
     });
   };
 
@@ -50,67 +53,72 @@ const UserManager = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, remove him/her!",
-    }).then(() => {
-      const roleInfo = { role: "user" };
-      axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
-        if (res.data.modifiedCount) {
-          refetch();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: `${user.displayName} removed from admin`,
-            showConfirmButton: false,
-            timer: 2500,
-          });
-        }
-      });
+      confirmButtonText: "Yes, remove admin",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const roleInfo = { role: "user" };
+        axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
+          if (res.data.modifiedCount) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: `${user.displayName} removed from admin`,
+              showConfirmButton: false,
+              timer: 2500,
+            });
+          }
+        });
+      }
     });
   };
 
   return (
-    <div>
-      <h2>Users: {users.length}</h2>
-      <label className="input">
-        <svg
-          className="h-[1em] opacity-50"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <g
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            strokeWidth="2.5"
+    <div className="p-4 md:p-8 lg:p-12">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-6">
+        Users ({users.length})
+      </h2>
+
+      {/* Search */}
+      <div className="mb-6 flex justify-center md:justify-start">
+        <div className="relative w-full max-w-md">
+          <input
+            type="search"
+            value={searchUser}
+            onChange={(e) => setSearchUser(e.target.value)}
+            placeholder="Search user..."
+            className="w-full border border-gray-300 rounded-lg py-2.5 pl-10 pr-4 focus:outline-none focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 transition"
+          />
+          <svg
+            className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
             fill="none"
+            viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </g>
-        </svg>
-        <input
-          onChange={(e)=> setSearchUser(e.target.value)}
-          type="search"
-          required
-          placeholder="Search User" />
-      </label>
+            <circle cx="11" cy="11" r="8" strokeWidth="2"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65" strokeWidth="2"></line>
+          </svg>
+        </div>
+      </div>
+
+      {/* User Table */}
       <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
+        <table className="min-w-full border border-gray-200 divide-y divide-gray-200">
+          <thead className="bg-gray-50">
             <tr>
-              <th>#</th>
-              <th>User</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Admin Action</th>
+              <th className="px-4 py-2 text-left text-gray-600 font-medium">#</th>
+              <th className="px-4 py-2 text-left text-gray-600 font-medium">User</th>
+              <th className="px-4 py-2 text-left text-gray-600 font-medium">Email</th>
+              <th className="px-4 py-2 text-left text-gray-600 font-medium">Role</th>
+              <th className="px-4 py-2 text-left text-gray-600 font-medium">Admin Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-white divide-y divide-gray-100">
             {users.map((user, index) => (
-              <tr>
-                <td>{index + 1}</td>
-                <td>
+              <tr key={user._id} className="hover:bg-gray-50">
+                <td className="px-4 py-3">{index + 1}</td>
+                <td className="px-4 py-3">
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
@@ -118,30 +126,31 @@ const UserManager = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="font-bold">{user.displayName}</div>
-                      <div className="text-sm opacity-50">United States</div>
+                      <div className="font-medium text-gray-800">{user.displayName}</div>
                     </div>
                   </div>
                 </td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <th>
+                <td className="px-4 py-3">{user.email}</td>
+                <td className="px-4 py-3 capitalize">{user.role}</td>
+                <td className="px-4 py-3 flex gap-2">
                   {user.role === "admin" ? (
                     <button
                       onClick={() => handleRemoveAdmin(user)}
-                      className="btn"
+                      title="Remove Admin"
+                      className="btn btn-sm bg-red-500 hover:bg-red-600 text-white"
                     >
                       <GiShieldDisabled />
                     </button>
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn"
+                      title="Make Admin"
+                      className="btn btn-sm bg-cyan-500 hover:bg-cyan-600 text-white"
                     >
                       <FaUserShield />
                     </button>
                   )}
-                </th>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -152,3 +161,5 @@ const UserManager = () => {
 };
 
 export default UserManager;
+
+
