@@ -3,15 +3,14 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useHook from "../../hooks/useHook";
 
 const LatestResolvedReports = () => {
-  const { user, loading } = useHook();
+  const { loading } = useHook();
   const axiosSecure = useAxiosSecure();
 
   const { data: reports = [], isLoading } = useQuery({
-    queryKey: ["recentSolvedReports", user?.email],
-    enabled: !!user?.email,
+    queryKey: ["recentSolvedReports"],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/reports/solved/latest/${user.email}`
+        `/reports/latest/solved`
       );
       return res.data;
     },

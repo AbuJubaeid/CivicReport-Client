@@ -1,102 +1,15 @@
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
-// import useHook from "../../hooks/useHook";
-
-// const LatestReports = () => {
-//   const { user, loading } = useHook();
-//   const axiosSecure = useAxiosSecure();
-
-//   const { data: reports = [], isLoading } = useQuery({
-//   queryKey: ["latestReports", user?.email],
-//   enabled: !!user?.email,
-//   queryFn: async () => {
-//     const res = await axiosSecure.get(
-//       `/reports/latest/${user.email}`
-//     );
-//     return res.data;
-//   },
-// });
-
-//   if (loading || isLoading) {
-//     return (
-//       <div className="flex justify-center mt-20">
-//         <span className="loading loading-spinner loading-lg"></span>
-//       </div>
-//     );
-//   }
-//   return (
-//     <div>
-//       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-//         {reports.map((report) => (
-//           <div
-//             key={report._id}
-//             className="card bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition"
-//           >
-//             {/* IMAGE */}
-//             <figure className="h-48 overflow-hidden bg-base-200">
-//               <img
-//                 src={
-//                   report.photoURL ||
-//                   "https://placehold.co/600x400?text=No+Image"
-//                 }
-//                 alt="Issue"
-//                 className="w-full h-full object-cover"
-//               />
-//             </figure>
-
-//             <div className="card-body">
-//               <div className="flex justify-between items-start gap-2">
-//                 <h3 className="card-title text-lg font-semibold line-clamp-2">
-//                   {report.issue}
-//                 </h3>
-
-//                 <span
-//                   className={`badge capitalize
-//                     ${report.reportStatus === "pending" && "badge-warning"}
-//                     ${report.reportStatus === "in-progress" && "badge-info"}
-//                     ${report.reportStatus === "resolved" && "badge-success"}
-//                   `}
-//                 >
-//                   {report.reportStatus}
-//                 </span>
-//               </div>
-
-//               {/* Category + Priority */}
-//               <div className="flex flex-wrap gap-2 mt-2">
-//                 <span className="badge badge-outline">{report.category}</span>
-//                 <span>{report.priority || "normal"}</span>
-//               </div>
-
-//               <div className="divider my-2"></div>
-
-//               <div className="flex justify-between text-sm text-gray-500">
-//                 <span>By: {report.name}</span>
-//                 <span>{new Date(report.createdAt).toLocaleDateString()}</span>
-//               </div>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LatestReports;
-
-// -----
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useHook from "../../hooks/useHook";
 
 const RecentReports = () => {
-  const { user, loading } = useHook();
+  const { loading } = useHook();
   const axiosSecure = useAxiosSecure();
 
   const { data: reports = [], isLoading } = useQuery({
-    queryKey: ["latestReports", user?.email],
-    enabled: !!user?.email,
+    queryKey: ["latestReports"],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/reports/latest/${user.email}`);
+      const res = await axiosSecure.get('/reports/latest');
       return res.data;
     },
   });

@@ -5,7 +5,7 @@ import Navbar from '../pages/shared/Navbar/Navbar';
 const RootLayout = () => {
     return (
       <div className='max-w-[900px] mx-auto'>
-        <div>
+        <div className='sticky top-0 z-50'>
             <Navbar></Navbar>
         </div>
         <div className='min-h-[200px]'>
