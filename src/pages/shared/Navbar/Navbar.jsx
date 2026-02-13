@@ -1,3 +1,173 @@
+// import { Link, NavLink } from "react-router";
+// import useHook from "../../../hooks/useHook";
+
+// const Navbar = () => {
+//   const { user, signOutFunc } = useHook();
+
+//   const handleSignOut = () => {
+//     signOutFunc()
+//       .then()
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+//   const links = (
+//     <>
+//       <>
+//         <li>
+//           <NavLink
+//             className={({ isActive }) =>
+//               isActive ? "active-link" : "inactive-link"
+//             }
+//             to="/"
+//           >
+//             Home
+//           </NavLink>
+//         </li>
+//         <li>
+//           <NavLink
+//             className={({ isActive }) =>
+//               isActive ? "active-link" : "inactive-link"
+//             }
+//             to="/about-us"
+//           >
+//             About Us
+//           </NavLink>
+//         </li>
+//         <li>
+//           <NavLink
+//             className={({ isActive }) =>
+//               isActive ? "active-link" : "inactive-link"
+//             }
+//             to="/all-report"
+//           >
+//             All Reports
+//           </NavLink>
+//         </li>
+//         <li>
+//           <NavLink
+//             className={({ isActive }) =>
+//               isActive ? "active-link" : "inactive-link"
+//             }
+//             to="/impact"
+//           >
+//             Impact
+//           </NavLink>
+//         </li>
+//       </>
+
+//       {user && (
+//         <>
+//           <li>
+//             <NavLink
+//               className={({ isActive }) =>
+//                 isActive ? "active-link" : "inactive-link"
+//               }
+//               to="/create-issue"
+//             >
+//               Create Report
+//             </NavLink>
+//           </li>
+
+//           <li className="dropdown flex items-center justify-center cursor-pointer">
+//             <p tabIndex={0}>Dashboard</p>
+//             <ul
+//               tabIndex="-1"
+//               className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+//             >
+//               <li>
+//                 <NavLink
+//                   className={({ isActive }) =>
+//                     isActive ? "active-link" : "inactive-link"
+//                   }
+//                   to="/dashboard/my-reports"
+//                 >
+//                   My Reports
+//                 </NavLink>
+//               </li>
+//               <li>
+//                 <NavLink
+//                   className={({ isActive }) =>
+//                     isActive ? "active-link" : "inactive-link"
+//                   }
+//                   to="/dashboard/payment-history"
+//                 >
+//                   Payment History
+//                 </NavLink>
+//               </li>
+//             </ul>
+//           </li>
+
+//           <li>
+//             <NavLink
+//               className={({ isActive }) =>
+//                 isActive ? "active-link" : "inactive-link"
+//               }
+//               to="/staff"
+//             >
+//               Be a staff
+//             </NavLink>
+//           </li>
+//         </>
+//       )}
+//     </>
+//   );
+//   return (
+//     <div className="navbar bg-base-100 shadow-sm">
+//       <div className="navbar-start">
+//         <div className="dropdown">
+//           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+//             <svg
+//               xmlns="http://www.w3.org/2000/svg"
+//               className="h-5 w-5"
+//               fill="none"
+//               viewBox="0 0 24 24"
+//               stroke="currentColor"
+//             >
+//               {" "}
+//               <path
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth="2"
+//                 d="M4 6h16M4 12h8m-8 6h16"
+//               />{" "}
+//             </svg>
+//           </div>
+//           <ul
+//             tabIndex="-1"
+//             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+//           >
+//             {links}
+//           </ul>
+//         </div>
+//         <Link to="/" className="text-2xl mx-4 flex justify-center items-center  font-bold">
+//           <img className=" w-[30px] h-[30px]" src="/src/assets/image/logo.png" alt="logo" />
+//           CivicReport
+//         </Link>
+//       </div>
+//       <div className="navbar-center hidden lg:flex">
+//         <ul className="menu menu-horizontal px-1">{links}</ul>
+//       </div>
+//       <div className="navbar-end">
+//         {user ? (
+//           <a onClick={handleSignOut} className="btn">
+//             SignOut
+//           </a>
+//         ) : (
+//           <Link className="btn" to="/login">
+//             Login
+//           </Link>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Navbar;
+
+
+// -------------
+
 import { Link, NavLink } from "react-router";
 import useHook from "../../../hooks/useHook";
 
@@ -6,117 +176,76 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     signOutFunc()
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
+      .then(() => {
+        console.log("Signed out");
+      })
+      .catch((error) => console.log(error));
   };
+
   const links = (
     <>
-      <>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "active-link" : "inactive-link"
-            }
-            to="/"
-          >
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "active-link" : "inactive-link"
-            }
-            to="/about-us"
-          >
-            About Us
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "active-link" : "inactive-link"
-            }
-            to="/all-report"
-          >
-            All Reports
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "active-link" : "inactive-link"
-            }
-            to="/impact"
-          >
-            Impact
-          </NavLink>
-        </li>
-      </>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active-link" : "inactive-link"
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active-link" : "inactive-link"
+          }
+          to="/about-us"
+        >
+          About Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active-link" : "inactive-link"
+          }
+          to="/all-report"
+        >
+          All Reports
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "active-link" : "inactive-link"
+          }
+          to="/impact"
+        >
+          Impact
+        </NavLink>
+      </li>
 
       {user && (
-        <>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "active-link" : "inactive-link"
-              }
-              to="/create-issue"
-            >
-              Create Report
-            </NavLink>
-          </li>
-
-          <li className="dropdown flex items-center justify-center cursor-pointer">
-            <p tabIndex={0}>Dashboard</p>
-            <ul
-              tabIndex="-1"
-              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
-            >
-              <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "active-link" : "inactive-link"
-                  }
-                  to="/dashboard/my-reports"
-                >
-                  My Reports
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "active-link" : "inactive-link"
-                  }
-                  to="/dashboard/payment-history"
-                >
-                  Payment History
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "active-link" : "inactive-link"
-              }
-              to="/staff"
-            >
-              Be a staff
-            </NavLink>
-          </li>
-        </>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active-link" : "inactive-link"
+            }
+            to="/create-issue"
+          >
+            Create Report
+          </NavLink>
+        </li>
       )}
     </>
   );
+
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-sm px-4 md:px-6">
+      {/* Navbar Start */}
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -124,35 +253,105 @@ const Navbar = () => {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              {" "}
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
                 d="M4 6h16M4 12h8m-8 6h16"
-              />{" "}
+              />
             </svg>
-          </div>
+          </label>
           <ul
-            tabIndex="-1"
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {links}
           </ul>
         </div>
-        <Link to="/" className="text-2xl mx-4 flex justify-center items-center  font-bold">
-          <img className=" w-[30px] h-[30px]" src="/src/assets/image/logo.png" alt="logo" />
+        <Link
+          to="/"
+          className="text-2xl font-bold flex items-center gap-2 ml-2 md:ml-0"
+        >
+          <img
+            className="w-8 h-8"
+            src="/src/assets/image/logo.png"
+            alt="logo"
+          />
           CivicReport
         </Link>
       </div>
+
+      {/* Navbar Center */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
+
+      {/* Navbar End */}
       <div className="navbar-end">
         {user ? (
-          <a onClick={handleSignOut} className="btn">
-            SignOut
-          </a>
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full border-2 border-blue-500">
+                <img
+                  src={user.photoURL || "/src/assets/image/default-avatar.png"}
+                  alt="Profile"
+                />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2"
+            >
+              <li className="font-semibold text-blue-600">{user.displayName}</li>
+
+              {/* Dashboard sub-dropdown */}
+              <li tabIndex={0} className="dropdown dropdown-end">
+                <span className="justify-between cursor-pointer">
+                  Dashboard
+                  <svg
+                    className="fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M7 10l5 5 5-5H7z" />
+                  </svg>
+                </span>
+                <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-0">
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : "inactive-link"
+                      }
+                      to="/dashboard/my-reports"
+                    >
+                      My Reports
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "active-link" : "inactive-link"
+                      }
+                      to="/dashboard/payment-history"
+                    >
+                      Payment History
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <button
+                  onClick={handleSignOut}
+                  className="text-red-500 font-medium"
+                >
+                  Sign Out
+                </button>
+              </li>
+            </ul>
+          </div>
         ) : (
           <Link className="btn" to="/login">
             Login
@@ -164,3 +363,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

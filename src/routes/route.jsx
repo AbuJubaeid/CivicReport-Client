@@ -17,6 +17,7 @@ import StaffTask from "../pages/DashBoard/StaffTask/StaffTask";
 import UserManager from "../pages/DashBoard/UserManager/UserManager";
 import Home from "../pages/Home/Home/Home";
 import Impact from "../pages/Impact/Impact";
+import ReportDetailPage from "../pages/ReportDetailPage/ReportDetailPage";
 import Staff from "../pages/Staff/Staff";
 import AdminOnlyRoute from "./AdminOnlyRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
         {
           path: 'staff',
           element: <PrivateRoute><Staff></Staff></PrivateRoute>
+        },
+        {
+          path: 'report-detail/:id',
+          element: <PrivateRoute><ReportDetailPage></ReportDetailPage></PrivateRoute>
         },
     ]
   },

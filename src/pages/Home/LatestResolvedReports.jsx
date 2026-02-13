@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useHook from "../../hooks/useHook";
 
@@ -9,9 +10,7 @@ const LatestResolvedReports = () => {
   const { data: reports = [], isLoading } = useQuery({
     queryKey: ["recentSolvedReports"],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/reports/latest/solved`
-      );
+      const res = await axiosSecure.get(`/reports/latest/solved`);
       return res.data;
     },
   });
@@ -48,7 +47,7 @@ const LatestResolvedReports = () => {
           {reports.map((report) => (
             <div
               key={report._id}
-              className="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition"
+              className="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition flex flex-col"
             >
               {/* Image */}
               <figure className="h-44 bg-base-200 overflow-hidden">
@@ -62,35 +61,37 @@ const LatestResolvedReports = () => {
                 />
               </figure>
 
-              <div className="card-body">
+              <div className="card-body flex flex-col flex-1">
                 <div className="flex justify-between items-start gap-3">
                   <h3 className="card-title text-lg line-clamp-2">
                     {report.issue}
                   </h3>
-                  <span className="badge badge-success capitalize">
-                    Solved
-                  </span>
+                  <span className="badge badge-success capitalize">Solved</span>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="badge badge-outline">
-                    {report.category}
-                  </span>
-                  <span className="badge badge-outline">
-                    {report.location}
-                  </span>
+                  <span className="badge badge-outline">{report.category}</span>
+                  <span className="badge badge-outline">{report.location}</span>
                 </div>
 
                 <div className="divider my-2"></div>
 
-                <div className="flex justify-between text-sm text-gray-500">
+                <div className="flex justify-between text-sm text-gray-500 mb-2">
                   <span>By: {report.name}</span>
-                  <span>
-                    {new Date(report.createdAt).toLocaleDateString()}
-                  </span>
+                  <span>{new Date(report.createdAt).toLocaleDateString()}</span>
                 </div>
-                <div>
-                    <span>Reviewed By: {report.staffName}</span>
+                <div className="mb-4">
+                  <span>Reviewed By: {report.staffName || "N/A"}</span>
+                </div>
+
+                
+                <div className="mt-auto">
+                  <Link
+                    to={`/report-detail/${report._id}`}
+                    className="btn btn-primary w-full"
+                  >
+                    View Details
+                  </Link>
                 </div>
               </div>
             </div>

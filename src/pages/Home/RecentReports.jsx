@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useHook from "../../hooks/useHook";
 
@@ -24,7 +25,7 @@ const RecentReports = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      {/* PAGE TITLE */}
+      
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold text-base-content">Recent Reports</h2>
         <p className="text-gray-500 mt-2">
@@ -33,21 +34,21 @@ const RecentReports = () => {
         </p>
       </div>
 
-      {/* EMPTY STATE */}
+      
       {!reports.length && (
         <div className="text-center py-20">
           <p className="text-gray-500 text-lg">No reports found</p>
         </div>
       )}
 
-      {/* CARD GRID */}
+      
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {reports.map((report) => (
           <div
             key={report._id}
-            className="card bg-base-100 border border-base-200 shadow-sm hover:shadow-xl transition-all duration-300"
+            className="card bg-base-100 border border-base-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
           >
-            {/* IMAGE */}
+           
             <figure className="h-44 bg-base-200 overflow-hidden">
               <img
                 src={
@@ -59,8 +60,8 @@ const RecentReports = () => {
               />
             </figure>
 
-            <div className="card-body p-4">
-              {/* TITLE + STATUS */}
+            <div className="card-body p-4 flex flex-col flex-1">
+              
               <div className="flex justify-between items-start gap-2">
                 <h3 className="font-semibold text-base line-clamp-2">
                   {report.issue}
@@ -77,7 +78,7 @@ const RecentReports = () => {
                 </span>
               </div>
 
-              {/* CATEGORY + PRIORITY */}
+             
               <div className="flex flex-wrap gap-2 mt-2 text-sm">
                 <span className="badge badge-outline">{report.category}</span>
                 <span className="badge badge-ghost capitalize">
@@ -87,10 +88,20 @@ const RecentReports = () => {
 
               <div className="divider my-2"></div>
 
-              {/* FOOTER */}
-              <div className="flex justify-between text-xs text-gray-500">
+              
+              <div className="flex justify-between text-xs text-gray-500 mb-4">
                 <span>{report.name}</span>
                 <span>{new Date(report.createdAt).toLocaleDateString()}</span>
+              </div>
+
+             
+              <div className="mt-auto">
+                <Link
+                  to={`/report-detail/${report._id}`}
+                  className="btn btn-primary w-full"
+                >
+                  View Details
+                </Link>
               </div>
             </div>
           </div>
