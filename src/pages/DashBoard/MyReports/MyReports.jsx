@@ -1,4 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
@@ -8,8 +10,15 @@ import useHook from "../../../hooks/useHook";
 const MyReports = () => {
   const { user } = useHook();
   const axiosSecure = useAxiosSecure();
+  const [selectedReport, setSelectedReport] = useState(null);
+  const imageKey = import.meta.env.VITE_imageHostApiKey;
 
-  const { data: reports = [], refetch, isLoading } = useQuery({
+  /*FETCH REPORTS*/
+  const {
+    data: reports = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["MyReport", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
@@ -24,33 +33,64 @@ const MyReports = () => {
       text: "This report will be permanently removed.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#2563eb",
-      cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/reports/${id}`).then((res) => {
-          if (res.data.deletedCount) {
-            refetch();
-            Swal.fire("Deleted!", "Report removed successfully.", "success");
-          }
+        axiosSecure.delete(`/reports/${id}`).then(() => {
+          refetch();
+          Swal.fire("Deleted!", "Report deleted successfully.", "success");
         });
       }
     });
   };
 
-  const handlePayment = async (report) => {
-    const paymentInfo = {
-      issue: report.issue,
-      reportId: report._id,
-      email: report.email,
+  const handleUpdateSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const issue = form.issue.value.trim();
+    const category = form.category.value.trim();
+    const location = form.location.value.trim();
+    const imageFile = form.photo.files[0];
+
+    
+    if (!issue || !category || !location) {
+      return Swal.fire("Error", "All fields are required", "error");
+    }
+
+    let photoURL = selectedReport.photoURL;
+
+   
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append("image", imageFile);
+
+      const imgRes = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${imageKey}`,
+        formData,
+      );
+
+      photoURL = imgRes.data.data.url;
+    }
+
+    const updatedData = {
+      photoURL,
+      issue,
+      category,
+      location,
     };
 
-    const res = await axiosSecure.post(
-      "/create-checkout-session",
-      paymentInfo
-    );
-    window.location.assign(res.data.url);
+    
+    axiosSecure
+      .patch(`/reports/${selectedReport._id}`, updatedData)
+      .then(() => {
+        Swal.fire("Updated!", "Report updated successfully.", "success");
+        document.getElementById("edit_modal").close();
+        refetch();
+      })
+      .catch(() => {
+        Swal.fire("Error", "Failed to update report", "error");
+      });
   };
 
   if (isLoading) {
@@ -63,45 +103,27 @@ const MyReports = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      {/* Header */}
-      <div className="mb-6 text-center">
-        <h2 className="text-3xl font-bold text-base-content">
-          My Reports
-        </h2>
-        <p className="text-gray-500 mt-1">
-          View, manage, and track all the issues you have reported.
-        </p>
-      </div>
+      <h2 className="text-3xl font-bold text-center mb-6">My Reports</h2>
 
-      {/* Table */}
-      <div className="overflow-x-auto bg-base-100 border border-base-200 rounded-xl shadow-sm">
+      <div className="overflow-x-auto bg-base-100 rounded-xl shadow">
         <table className="table">
-          <thead className="bg-base-200 text-sm">
+          <thead className="bg-base-200">
             <tr>
               <th>#</th>
-              <th>Report</th>
+              <th>Issue</th>
               <th>Category</th>
               <th>Location</th>
               <th>Status</th>
-              <th>Priority</th>
               <th className="text-center">Actions</th>
             </tr>
           </thead>
 
           <tbody>
-            {reports.length === 0 && (
-              <tr>
-                <td colSpan="7" className="text-center py-10 text-gray-500">
-                  No reports found
-                </td>
-              </tr>
-            )}
-
             {reports.map((report, index) => (
               <tr key={report._id} className="hover">
-                <td className="font-medium">{index + 1}</td>
+                <td>{index + 1}</td>
 
-                <td className="font-medium max-w-xs truncate">
+                <td className="max-w-xs truncate font-medium">
                   {report.issue}
                 </td>
 
@@ -109,59 +131,48 @@ const MyReports = () => {
 
                 <td>{report.location}</td>
 
+                
                 <td>
                   <span
-                    className={`badge capitalize
-                      ${
-                        report.reportStatus === "pending" &&
-                        "badge-warning"
-                      }
-                      ${
-                        report.reportStatus === "in-progress" &&
-                        "badge-info"
-                      }
-                      ${
-                        report.reportStatus === "Solved" &&
-                        "badge-success"
-                      }
-                    `}
+                    className={`inline-block px-3 py-1 rounded-full text-sm font-medium capitalize
+                     ${report.reportStatus === "pending" ? "bg-yellow-300 text-yellow-800 border border-yellow-300" : ""}
+                    ${report.reportStatus === "In-Progress" ? "bg-blue-300 text-blue-800 border border-blue-300" : ""}
+                    ${report.reportStatus === "Solved" ? "bg-green-300 text-green-800 border border-green-300" : ""}
+                   `}
                   >
                     {report.reportStatus}
                   </span>
                 </td>
 
-                <td>
-                  {report.paymentStatus === "paid" ? (
-                    <span className="badge badge-success badge-outline">
-                      High
-                    </span>
-                  ) : (
-                    <button
-                      onClick={() => handlePayment(report)}
-                      className="btn btn-xs btn-outline btn-secondary"
-                    >
-                      Boost
-                    </button>
-                  )}
-                </td>
+                
+                <td className="text-center">
+                  <div className="flex justify-center gap-3">
+                    
+                    <div className="tooltip" data-tip="Edit Report">
+                      <button
+                        disabled={report.paymentStatus === "paid"}
+                        onClick={() => {
+                          setSelectedReport(report);
+                          document.getElementById("edit_modal").showModal();
+                        }}
+                        className={`btn btn-md btn-ghost ${
+                          report.paymentStatus === "paid" &&
+                          "btn-disabled opacity-50"
+                        }`}
+                      >
+                        <FaRegEdit size={18} />
+                      </button>
+                    </div>
 
-                <td>
-                  <div className="flex justify-center gap-2">
-
-                    <button
-                      className="btn btn-sm btn-ghost tooltip"
-                      data-tip="Edit"
-                    >
-                      <FaRegEdit size={16} />
-                    </button>
-
-                    <button
-                      onClick={() => handleDeleteReport(report._id)}
-                      className="btn btn-sm btn-ghost text-error tooltip"
-                      data-tip="Delete"
-                    >
-                      <MdOutlineDeleteForever size={18} />
-                    </button>
+                    
+                    <div className="tooltip" data-tip="Delete Report">
+                      <button
+                        onClick={() => handleDeleteReport(report._id)}
+                        className="btn btn-md btn-ghost text-error"
+                      >
+                        <MdOutlineDeleteForever size={20} />
+                      </button>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -169,9 +180,65 @@ const MyReports = () => {
           </tbody>
         </table>
       </div>
+
+      {/*EDIT MODAL*/}
+      <dialog id="edit_modal" className="modal">
+        <div className="modal-box max-w-lg">
+          <h3 className="font-bold text-lg mb-4">Edit Report</h3>
+
+          {selectedReport && (
+            <form onSubmit={handleUpdateSubmit} className="space-y-3">
+              <img
+                src={selectedReport.photoURL}
+                alt="preview"
+                className="w-full h-40 object-cover rounded"
+              />
+
+              <input
+                type="file"
+                name="photo"
+                className="file-input file-input-bordered w-full"
+              />
+
+              <input
+                name="issue"
+                defaultValue={selectedReport.issue}
+                className="input input-bordered w-full"
+                placeholder="Issue"
+              />
+
+              <input
+                name="category"
+                defaultValue={selectedReport.category}
+                className="input input-bordered w-full"
+                placeholder="Category"
+              />
+
+              <input
+                name="location"
+                defaultValue={selectedReport.location}
+                className="input input-bordered w-full"
+                placeholder="Location"
+              />
+
+              <div className="modal-action">
+                <button className="btn btn-primary" type="submit">
+                  Save Changes
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => document.getElementById("edit_modal").close()}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
+      </dialog>
     </div>
   );
 };
 
 export default MyReports;
-
