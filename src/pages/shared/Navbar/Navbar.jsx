@@ -70,9 +70,7 @@ const Navbar = () => {
           </li>
 
           <li className="dropdown flex items-center justify-center cursor-pointer">
-            <p tabIndex={0}>
-              Dashboard
-            </p>
+            <p tabIndex={0}>Dashboard</p>
             <ul
               tabIndex="-1"
               className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
@@ -142,7 +140,8 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <Link to="/" className="text-2xl font-bold">
+        <Link to="/" className="text-2xl mx-4 flex justify-center items-center  font-bold">
+          <img className=" w-[30px] h-[30px]" src="/src/assets/image/logo.png" alt="logo" />
           CivicReport
         </Link>
       </div>
@@ -165,5 +164,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
