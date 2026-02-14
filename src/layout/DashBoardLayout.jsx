@@ -200,11 +200,12 @@ const DashBoardLayout = () => {
 
             {/* List item */}
             <li>
-              <button
+              <NavLink
+                to={`/dashboard/user-profile`}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Settings"
+                data-tip="Profile"
               >
-                {/* Settings icon */}
+                {/* Profile icon */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -220,8 +221,8 @@ const DashBoardLayout = () => {
                   <circle cx="17" cy="17" r="3"></circle>
                   <circle cx="7" cy="7" r="3"></circle>
                 </svg>
-                <span className="is-drawer-close:hidden">Settings</span>
-              </button>
+                <span className="is-drawer-close:hidden">Profile</span>
+              </NavLink>
             </li>
           </ul>
         </div>

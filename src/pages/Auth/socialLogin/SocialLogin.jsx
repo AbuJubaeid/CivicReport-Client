@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useHook from "../../../hooks/useHook";
 
 const SocialLogin = () => {
     const {signInWithPopupFunc} = useHook()
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const handleGoogleSignIn = () =>{
         signInWithPopupFunc()
@@ -18,6 +20,7 @@ const SocialLogin = () => {
           axiosSecure.post("/users", userInfo).then((res) => {
               console.log("user created in the database", res.data);
           });
+          navigate('/')
         })
         .catch(error=>{
             console.log(error)

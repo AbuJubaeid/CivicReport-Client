@@ -1,0 +1,154 @@
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useHook from "../../hooks/useHook";
+
+const UserProfile = () => {
+  const axiosSecure = useAxiosSecure();
+  const { user, setUser } = useHook(); 
+  const [localUser, setLocalUser] = useState(null); 
+  const [open, setOpen] = useState(false);
+  const imageKey = import.meta.env.VITE_imageHostApiKey;
+
+  
+  useEffect(() => {
+    if (user?.email) {
+      axiosSecure.get("/users/me")
+        .then(res => setLocalUser(res.data))
+        .catch(err => console.error(err));
+    }
+  }, [user?.email, axiosSecure]);
+
+  if (!localUser) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+  const handleUpdateSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const displayName = form.displayName.value.trim();
+    const email = form.email.value.trim();
+    const imageFile = form.photo.files[0];
+
+    if (!displayName) {
+      return Swal.fire("Error", "Name is required", "error");
+    }
+
+    let photoURL = localUser.photoURL;
+
+    
+    if (imageFile) {
+      try {
+        const formData = new FormData();
+        formData.append("image", imageFile);
+
+        const res = await fetch(`https://api.imgbb.com/1/upload?key=${imageKey}`, {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (!data.success) throw new Error("Image upload failed");
+        photoURL = data.data.url;
+      } catch (err) {
+        console.error(err);
+        return Swal.fire("Error", "Failed to upload image", "error");
+      }
+    }
+
+    const updatedData = { displayName, email, photoURL };
+
+    try {
+      await axiosSecure.patch("/users/me", updatedData);
+
+      
+      setUser({ ...user, ...updatedData });
+
+      
+      setLocalUser({ ...localUser, ...updatedData });
+
+      Swal.fire("Updated!", "Profile updated successfully.", "success");
+      setOpen(false);
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Failed to update profile", "error");
+    }
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto py-10 px-4">
+      <div className="bg-white shadow-xl rounded-xl p-6 flex flex-col md:flex-row gap-6 items-center">
+        <img
+          src={localUser.photoURL || "https://placehold.co/150"}
+          className="w-32 h-32 rounded-full object-cover"
+        />
+        <div className="flex-1 space-y-2">
+          <h2 className="text-2xl font-bold">{localUser.displayName}</h2>
+          <p className="text-gray-600">{localUser.email}</p>
+          <p className="text-gray-600">{localUser.role}</p>
+        </div>
+        <button
+          onClick={() => setOpen(true)}
+          className="btn btn-primary"
+        >
+          Edit Profile
+        </button>
+      </div>
+
+      
+      {open && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <form
+            onSubmit={handleUpdateSubmit}
+            className="bg-white p-6 rounded-xl w-full max-w-md space-y-4"
+          >
+            <h2 className="text-xl font-bold text-center">Edit Profile</h2>
+
+            <img
+              src={localUser.photoURL || "https://placehold.co/150"}
+              alt="preview"
+              className="w-32 h-32 rounded-full object-cover mx-auto"
+            />
+
+            <input type="file" name="photo" className="file-input file-input-bordered w-full" />
+
+            <input
+              name="displayName"
+              defaultValue={localUser.displayName}
+              className="input input-bordered w-full"
+              placeholder="Name"
+            />
+
+            <input
+              name="email"
+              defaultValue={localUser.email || ""}
+              className="input input-bordered w-full"
+              placeholder="Email"
+            />
+
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default UserProfile;
+
+
