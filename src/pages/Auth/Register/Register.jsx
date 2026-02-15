@@ -199,7 +199,7 @@ const Register = () => {
       {/* RIGHT SIDE IMAGE */}
       <div className="lg:w-1/2 hidden lg:flex items-center justify-center px-12">
         <img
-          src="/src/assets/image/register.png"
+          src="https://i.ibb.co.com/XT1Ppnb/register.png"
           alt="Register Illustration"
           className="w-full max-w-xl object-contain"
         />

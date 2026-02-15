@@ -173,7 +173,7 @@ const Login = () => {
       {/* RIGHT SIDE IMAGE */}
       <div className="lg:w-1/2 hidden lg:flex items-center justify-start pl-16">
         <img
-          src="/src/assets/image/login.png"
+          src="https://i.ibb.co.com/VR3fhBB/login.png"
           alt="Login Illustration"
           className="w-full max-w-xl object-contain"
         />

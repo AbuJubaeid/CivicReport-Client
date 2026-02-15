@@ -91,6 +91,10 @@ export const router = createBrowserRouter([
         path: "my-reports",
         Component: MyReports,
       },
+      // {
+      //   path: "payment/:reportId",
+      //   Component: Payment,
+      // },
       {
         path: "payment-success",
         Component: PaymentSuccess,

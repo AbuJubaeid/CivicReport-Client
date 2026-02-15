@@ -35,7 +35,7 @@ const Staff = () => {
       {/* Optional left-side illustration */}
       <div className="hidden md:flex md:w-1/2 items-center justify-center">
         <img
-          src="/src/assets/image/staff-register.png"
+          src="https://i.ibb.co.com/Z12GbS8T/staff-register.png"
           alt="Staff Illustration"
           className="w-full max-w-md object-contain"
         />

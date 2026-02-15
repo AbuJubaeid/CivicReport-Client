@@ -104,7 +104,7 @@ const Navbar = () => {
         >
           <img
             className="w-8 h-8"
-            src="/src/assets/image/logo.png"
+            src="https://i.ibb.co.com/s9yzFJsz/logo.png"
             alt="logo"
           />
           CivicReport

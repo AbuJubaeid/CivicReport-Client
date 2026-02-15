@@ -13,13 +13,13 @@ const MyReports = () => {
   const [selectedReport, setSelectedReport] = useState(null);
   const imageKey = import.meta.env.VITE_imageHostApiKey;
 
-  /*FETCH REPORTS*/
+  
   const {
     data: reports = [],
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["MyReport", user?.email],
+    queryKey: ["myReports", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
       const res = await axiosSecure.get(`/reports?email=${user.email}`);
@@ -27,6 +27,26 @@ const MyReports = () => {
     },
   });
 
+  
+  const handlePayment = async(report) => {
+    const isPaid = report.paymentStatus === "paid";
+
+    if (isPaid) {
+      return Swal.fire("Info", "Payment already completed", "info");
+    }
+
+    const paymentInfo = {
+            issue: report.issue,
+            reportId: report._id,
+            email: report.email,
+        }
+
+        const res = await axiosSecure.post('/create-checkout-session', paymentInfo)
+        console.log(res.data)
+        window.location.href = res.data.url 
+  };
+
+  /* DELETE */
   const handleDeleteReport = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -44,6 +64,7 @@ const MyReports = () => {
     });
   };
 
+  
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -53,14 +74,12 @@ const MyReports = () => {
     const location = form.location.value.trim();
     const imageFile = form.photo.files[0];
 
-    
     if (!issue || !category || !location) {
       return Swal.fire("Error", "All fields are required", "error");
     }
 
     let photoURL = selectedReport.photoURL;
 
-   
     if (imageFile) {
       const formData = new FormData();
       formData.append("image", imageFile);
@@ -73,14 +92,8 @@ const MyReports = () => {
       photoURL = imgRes.data.data.url;
     }
 
-    const updatedData = {
-      photoURL,
-      issue,
-      category,
-      location,
-    };
+    const updatedData = { photoURL, issue, category, location };
 
-    
     axiosSecure
       .patch(`/reports/${selectedReport._id}`, updatedData)
       .then(() => {
@@ -114,74 +127,71 @@ const MyReports = () => {
               <th>Category</th>
               <th>Location</th>
               <th>Status</th>
+              <th>Payment</th>
               <th className="text-center">Actions</th>
             </tr>
           </thead>
 
           <tbody>
-            {reports.map((report, index) => (
-              <tr key={report._id} className="hover">
-                <td>{index + 1}</td>
+            {reports.map((report, index) => {
+              
+              const isPaid = report.paymentStatus === "paid";
 
-                <td className="max-w-xs truncate font-medium">
-                  {report.issue}
-                </td>
+              return (
+                <tr key={report._id}>
+                  <td>{index + 1}</td>
+                  <td className="max-w-xs truncate">{report.issue}</td>
+                  <td>{report.category}</td>
+                  <td>{report.location}</td>
 
-                <td>{report.category}</td>
+                  <td>
+                    <span className="badge badge-outline capitalize">
+                      {report.reportStatus || "pending"}
+                    </span>
+                  </td>
 
-                <td>{report.location}</td>
-
-                
-                <td>
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-sm font-medium capitalize
-                     ${report.reportStatus === "pending" ? "bg-yellow-300 text-yellow-800 border border-yellow-300" : ""}
-                    ${report.reportStatus === "In-Progress" ? "bg-blue-300 text-blue-800 border border-blue-300" : ""}
-                    ${report.reportStatus === "Solved" ? "bg-green-300 text-green-800 border border-green-300" : ""}
-                   `}
-                  >
-                    {report.reportStatus}
-                  </span>
-                </td>
-
-                
-                <td className="text-center">
-                  <div className="flex justify-center gap-3">
-                    
-                    <div className="tooltip" data-tip="Edit Report">
+                  <td>
+                    {report.paymentStatus === "paid" ? (
+                      <span className="badge badge-success">Paid</span>
+                    ) : (
                       <button
-                        disabled={report.paymentStatus === "paid"}
+                        onClick={() => handlePayment(report)}
+                        className="btn btn-xs btn-warning"
+                      >
+                        Pay
+                      </button>
+                    )}
+                  </td>
+
+                  <td className="text-center">
+                    <div className="flex justify-center gap-2">
+                      <button
+                        disabled={isPaid}
                         onClick={() => {
                           setSelectedReport(report);
                           document.getElementById("edit_modal").showModal();
                         }}
-                        className={`btn btn-md btn-ghost ${
-                          report.paymentStatus === "paid" &&
-                          "btn-disabled opacity-50"
-                        }`}
+                        className="btn btn-ghost btn-sm"
                       >
-                        <FaRegEdit size={18} />
+                        <FaRegEdit />
                       </button>
-                    </div>
 
-                    
-                    <div className="tooltip" data-tip="Delete Report">
                       <button
                         onClick={() => handleDeleteReport(report._id)}
-                        className="btn btn-md btn-ghost text-error"
+                        className="btn btn-ghost btn-sm text-error"
                       >
-                        <MdOutlineDeleteForever size={20} />
+                        <MdOutlineDeleteForever />
                       </button>
                     </div>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
 
-      {/*EDIT MODAL*/}
+      
       <dialog id="edit_modal" className="modal">
         <div className="modal-box max-w-lg">
           <h3 className="font-bold text-lg mb-4">Edit Report</h3>
@@ -190,41 +200,28 @@ const MyReports = () => {
             <form onSubmit={handleUpdateSubmit} className="space-y-3">
               <img
                 src={selectedReport.photoURL}
-                alt="preview"
                 className="w-full h-40 object-cover rounded"
               />
 
-              <input
-                type="file"
-                name="photo"
-                className="file-input file-input-bordered w-full"
-              />
-
+              <input type="file" name="photo" className="file-input w-full" />
               <input
                 name="issue"
                 defaultValue={selectedReport.issue}
-                className="input input-bordered w-full"
-                placeholder="Issue"
+                className="input w-full"
               />
-
               <input
                 name="category"
                 defaultValue={selectedReport.category}
-                className="input input-bordered w-full"
-                placeholder="Category"
+                className="input w-full"
               />
-
               <input
                 name="location"
                 defaultValue={selectedReport.location}
-                className="input input-bordered w-full"
-                placeholder="Location"
+                className="input w-full"
               />
 
               <div className="modal-action">
-                <button className="btn btn-primary" type="submit">
-                  Save Changes
-                </button>
+                <button className="btn btn-primary">Save</button>
                 <button
                   type="button"
                   className="btn"

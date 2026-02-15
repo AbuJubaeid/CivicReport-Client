@@ -32,7 +32,7 @@
 
 //     return (
 //         <div>
-//             <h3>Boost to pay <span className="text-green-500">'2$'</span> for: {report.issue}</h3>
+//             <h3>Boost to pay <span className="text-green-500">'1$'</span> for: {report.issue}</h3>
 //             <button onClick={handlePayment} className="btn btn-primary">Pay</button>
 //         </div>
 //     );
