@@ -8,7 +8,7 @@ const AssignStaff = () => {
   const staffModalRef = useRef();
   const [selectedReport, setSelectedReport] = useState();
 
-  const { data: reports = [], refetch } = useQuery({
+  const { data: reports = [], refetch:reportRefetch } = useQuery({
     queryKey: ["reports", "pending"],
     queryFn: async () => {
       const res = await axiosSecure.get("/reports?reportStatus=pending");
@@ -16,9 +16,9 @@ const AssignStaff = () => {
     },
   });
 
-  const { data: staffs = [] } = useQuery({
+  const { data: staffs = [], refetch: staffRefetch } = useQuery({
     queryKey: ["reports", "available"],
-    enabled: !!selectedReport,
+    enabled:!!selectedReport,
     queryFn: async () => {
       const res = await axiosSecure.get(
         `/staffs?status=approved&workStatus=available`
@@ -43,7 +43,8 @@ const AssignStaff = () => {
     axiosSecure.patch(`/reports/${selectedReport._id}`, staffInfo).then((res) => {
       if (res.data.modifiedCount) {
         staffModalRef.current.close();
-        refetch();
+        reportRefetch();
+        staffRefetch()
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -57,7 +58,7 @@ const AssignStaff = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
-      {/* Header */}
+      
       <div className="mb-6">
         <h2 className="text-2xl sm:text-3xl font-semibold text-slate-800">
           Assign Staff
@@ -68,7 +69,7 @@ const AssignStaff = () => {
         </p>
       </div>
 
-      {/* Desktop / Tablet Table */}
+      
       <div className="hidden md:block overflow-x-auto border border-slate-200 rounded-xl">
         <table className="min-w-full text-sm text-left">
           <thead className="bg-slate-100 text-slate-600 uppercase text-xs tracking-wider">
@@ -111,7 +112,7 @@ const AssignStaff = () => {
         </table>
       </div>
 
-      {/* Mobile Card Layout */}
+     
       <div className="md:hidden space-y-4">
         {reports.map((report, index) => (
           <div
