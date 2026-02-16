@@ -77,6 +77,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "user-profile",
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -91,10 +99,6 @@ export const router = createBrowserRouter([
         path: "my-reports",
         Component: MyReports,
       },
-      // {
-      //   path: "payment/:reportId",
-      //   Component: Payment,
-      // },
       {
         path: "payment-success",
         Component: PaymentSuccess,
@@ -106,14 +110,6 @@ export const router = createBrowserRouter([
       {
         path: "payment-history",
         Component: PaymentHistory,
-      },
-      {
-        path: "user-profile",
-        element: (
-          <PrivateRoute>
-            <UserProfile />
-          </PrivateRoute>
-        ),
       },
 
       // staff route only

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import useHook from "./useHook";
 
 const axiosSecure = axios.create({
-    baseURL: 'https://civic-report-server.vercel.app'
+    baseURL: 'http://localhost:3000'
 }) 
 const useAxiosSecure = () => {
 

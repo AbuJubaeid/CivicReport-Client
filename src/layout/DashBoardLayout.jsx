@@ -201,7 +201,7 @@ const DashBoardLayout = () => {
             {/* List item */}
             <li>
               <NavLink
-                to={`/dashboard/user-profile`}
+                to={`/user-profile`}
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                 data-tip="Profile"
               >
