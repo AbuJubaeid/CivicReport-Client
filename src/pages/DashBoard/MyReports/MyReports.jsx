@@ -13,7 +13,6 @@ const MyReports = () => {
   const [selectedReport, setSelectedReport] = useState(null);
   const imageKey = import.meta.env.VITE_imageHostApiKey;
 
-  
   const {
     data: reports = [],
     refetch,
@@ -27,8 +26,25 @@ const MyReports = () => {
     },
   });
 
-  
-  const handlePayment = async(report) => {
+  // const handlePayment = async(report) => {
+  //   const isPaid = report.paymentStatus === "paid";
+
+  //   if (isPaid) {
+  //     return Swal.fire("Info", "Payment already completed", "info");
+  //   }
+
+  //   const paymentInfo = {
+  //           issue: report.issue,
+  //           reportId: report._id,
+  //           email: report.email,
+  //       }
+
+  //       const res = await axiosSecure.post('/create-checkout-session', paymentInfo)
+  //       console.log(res.data)
+  //       window.location.href = res.data.url
+  // };
+
+  const handlePayment = async (report) => {
     const isPaid = report.paymentStatus === "paid";
 
     if (isPaid) {
@@ -36,14 +52,28 @@ const MyReports = () => {
     }
 
     const paymentInfo = {
-            issue: report.issue,
-            reportId: report._id,
-            email: report.email,
-        }
+      issue: report.issue,
+      reportId: report._id,
+      email: report.email,
+    };
 
-        const res = await axiosSecure.post('/create-checkout-session', paymentInfo)
-        console.log(res.data)
-        window.location.href = res.data.url 
+    try {
+      const res = await axiosSecure.post(
+        "/create-checkout-session/me", // ✅ FIXED ENDPOINT
+        paymentInfo,
+      );
+
+      // ✅ SAFETY CHECK
+      if (!res.data?.url) {
+        throw new Error("Stripe URL not received");
+      }
+
+      // ✅ CORRECT REDIRECT
+      window.location.href = res.data.url;
+    } catch (err) {
+      console.error("Payment Error:", err);
+      Swal.fire("Error", "Failed to initiate payment", "error");
+    }
   };
 
   /* DELETE */
@@ -64,7 +94,6 @@ const MyReports = () => {
     });
   };
 
-  
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -134,7 +163,6 @@ const MyReports = () => {
 
           <tbody>
             {reports.map((report, index) => {
-              
               const isPaid = report.paymentStatus === "paid";
 
               return (
@@ -151,9 +179,9 @@ const MyReports = () => {
                   </td>
 
                   <td>
-                    {report.paymentStatus === "paid" ? 
+                    {report.paymentStatus === "paid" ? (
                       <span className="badge badge-success">Paid</span>
-                     : (
+                    ) : (
                       <button
                         onClick={() => handlePayment(report)}
                         className="btn btn-xs btn-warning"
@@ -191,7 +219,6 @@ const MyReports = () => {
         </table>
       </div>
 
-      
       <dialog id="edit_modal" className="modal">
         <div className="modal-box max-w-lg">
           <h3 className="font-bold text-lg mb-4">Edit Report</h3>

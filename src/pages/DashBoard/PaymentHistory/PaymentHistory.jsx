@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import jsPDF from "jspdf";
 import { useState } from "react";
 import { GrFormView } from "react-icons/gr";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -26,9 +27,37 @@ const PaymentHistory = () => {
     );
   }
 
+//  pdf file create
+  const downloadReceiptPDF = (payment) => {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text("Payment Receipt", 20, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Report: ${payment.name}`, 20, 40);
+    doc.text(`Email: ${payment.email}`, 20, 50);
+    doc.text(`Amount: $${payment.amount}`, 20, 60);
+    doc.text(`Status: Paid`, 20, 70);
+    doc.text(
+      `Date: ${new Date(payment.paidAt).toLocaleString()}`,
+      20,
+      80
+    );
+
+    doc.text("Transaction ID:", 20, 95);
+    doc.text(payment.transactionId, 20, 105, { maxWidth: 170 });
+
+    doc.setFontSize(10);
+    doc.text("Thank you for your payment.", 20, 130);
+    doc.text("This is a system-generated receipt.", 20, 138);
+
+    doc.save(`payment-receipt-${payment.transactionId}.pdf`);
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Header */}
+      
       <div className="mb-6 text-center">
         <h2 className="text-3xl font-bold">Payment History</h2>
         <p className="text-gray-500 mt-1">
@@ -36,7 +65,7 @@ const PaymentHistory = () => {
         </p>
       </div>
 
-      {/* Table */}
+     
       <div className="overflow-x-auto bg-base-100 rounded-xl shadow-sm">
         <table className="table">
           <thead className="bg-base-200">
@@ -109,6 +138,14 @@ const PaymentHistory = () => {
                 <strong>Transaction ID:</strong>{" "}
                 {selectedPayment.transactionId}
               </p>
+
+              
+              <button
+                onClick={() => downloadReceiptPDF(selectedPayment)}
+                className="btn btn-secondary mt-3"
+              >
+                Download Receipt (PDF)
+              </button>
             </div>
 
             <div className="modal-action">
@@ -127,4 +164,5 @@ const PaymentHistory = () => {
 };
 
 export default PaymentHistory;
+
 
