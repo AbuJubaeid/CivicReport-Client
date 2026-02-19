@@ -151,9 +151,9 @@ const MyReports = () => {
                   </td>
 
                   <td>
-                    {report.paymentStatus === "paid" ? (
+                    {report.paymentStatus === "paid" ? 
                       <span className="badge badge-success">Paid</span>
-                    ) : (
+                     : (
                       <button
                         onClick={() => handlePayment(report)}
                         className="btn btn-xs btn-warning"

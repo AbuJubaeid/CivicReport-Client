@@ -12,6 +12,7 @@ import CompletedReport from "../pages/DashBoard/CompletedReport/CompletedReport"
 import MyReports from "../pages/DashBoard/MyReports/MyReports";
 import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
+import ProfilePaymentSuccess from "../pages/DashBoard/Payment/ProfilePaymentSuccess";
 import PaymentHistory from "../pages/DashBoard/PaymentHistory/PaymentHistory";
 import StaffTask from "../pages/DashBoard/StaffTask/StaffTask";
 import UserManager from "../pages/DashBoard/UserManager/UserManager";
@@ -102,6 +103,10 @@ export const router = createBrowserRouter([
       {
         path: "payment-success",
         Component: PaymentSuccess,
+      },
+      {
+        path: "payment-success/me",
+        Component: ProfilePaymentSuccess,
       },
       {
         path: "payment-cancelled",

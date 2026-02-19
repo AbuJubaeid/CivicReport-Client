@@ -32,6 +32,9 @@ const UserProfile = () => {
     );
   }
 
+  
+  const isHighPriority = localUser.priority === "High-Priority";
+
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -55,7 +58,7 @@ const UserProfile = () => {
           {
             method: "POST",
             body: formData,
-          },
+          }
         );
 
         const data = await res.json();
@@ -83,86 +86,136 @@ const UserProfile = () => {
     }
   };
 
+  const handleIncreasePriority = async (localUser) => {
+    const isPaid = localUser.paymentStatus === "paid";
+
+    if (isPaid) {
+      return Swal.fire("Info", "Payment already completed", "info");
+    }
+
+    const paymentInfo = {
+      issue: "Increase User Priority",
+      userId: localUser._id,
+      email: localUser.email,
+    };
+
+    try {
+      const res = await axiosSecure.post(
+        "/create-checkout-session/me",
+        paymentInfo
+      );
+      window.location.href = res.data.url;
+    } catch (err) {
+      console.error(err);
+      Swal.fire("Error", "Payment initialization failed", "error");
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
-      <div className="bg-white shadow-xl rounded-xl p-6 flex flex-col md:flex-row gap-6 items-center">
+      
+      <div
+        className={`shadow-xl rounded-xl p-6 flex flex-col md:flex-row gap-6 items-center
+        ${
+          isHighPriority
+            ? "bg-green-50 border-2 border-green-400"
+            : "bg-white"
+        }`}
+      >
         <img
           src={localUser.photoURL || "https://placehold.co/150"}
           className="w-32 h-32 rounded-full object-cover"
         />
+
         <div className="flex-1 space-y-2">
           <h2 className="text-2xl font-bold">{localUser.displayName}</h2>
           <p className="text-gray-600">Email: {localUser.email}</p>
           <p className="text-gray-600">Role: {localUser.role}</p>
+
           {role === "user" && (
             <span className="text-gray-600">
-              Priority: {localUser.priority || "normal"}
+              Priority:{" "}
+              <span className={isHighPriority ? "font-semibold text-yellow-700" : ""}>
+                {localUser.priority || "normal"}
+              </span>
             </span>
           )}
         </div>
+
         <div className="grid col-span-1 gap-2">
           <button onClick={() => setOpen(true)} className="btn btn-primary">
-          Edit Profile
-        </button>
-        <button className="btn btn-primary">Increase Priority <small>(Pay-1000৳)</small></button>
+            Edit Profile
+          </button>
+
+          
+          <button
+            onClick={() => handleIncreasePriority(localUser)}
+            disabled={isHighPriority}
+            className={`btn btn-primary ${
+              isHighPriority
+                ? "btn-disabled opacity-60 cursor-not-allowed"
+                : ""
+            }`}
+          >
+            {isHighPriority ? "High Priority Enabled" : "Increase Priority "}
+            {!isHighPriority && <small>(Pay-1000৳)</small>}
+          </button>
         </div>
-        
       </div>
 
-      <div>
-        {open && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-            <form
-              onSubmit={handleUpdateSubmit}
-              className="bg-white p-6 rounded-xl w-full max-w-md space-y-4"
-            >
-              <h2 className="text-xl font-bold text-center">Edit Profile</h2>
+      {/* EDIT MODAL */}
+      {open && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <form
+            onSubmit={handleUpdateSubmit}
+            className="bg-white p-6 rounded-xl w-full max-w-md space-y-4"
+          >
+            <h2 className="text-xl font-bold text-center">Edit Profile</h2>
 
-              <img
-                src={localUser.photoURL || "https://placehold.co/150"}
-                alt="preview"
-                className="w-32 h-32 rounded-full object-cover mx-auto"
-              />
+            <img
+              src={localUser.photoURL || "https://placehold.co/150"}
+              alt="preview"
+              className="w-32 h-32 rounded-full object-cover mx-auto"
+            />
 
-              <input
-                type="file"
-                name="photo"
-                className="file-input file-input-bordered w-full"
-              />
+            <input
+              type="file"
+              name="photo"
+              className="file-input file-input-bordered w-full"
+            />
 
-              <input
-                name="displayName"
-                defaultValue={localUser.displayName}
-                className="input input-bordered w-full"
-                placeholder="Name"
-              />
+            <input
+              name="displayName"
+              defaultValue={localUser.displayName}
+              className="input input-bordered w-full"
+              placeholder="Name"
+            />
 
-              <input
-                name="email"
-                defaultValue={localUser.email || ""}
-                className="input input-bordered w-full"
-                placeholder="Email"
-              />
+            <input
+              name="email"
+              defaultValue={localUser.email || ""}
+              className="input input-bordered w-full"
+              placeholder="Email"
+            />
 
-              <div className="flex justify-end gap-2">
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={() => setOpen(false)}
-                >
-                  Cancel
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Save
-                </button>
-              </div>
-            </form>
-          </div> 
-        )}
-        
-      </div>
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setOpen(false)}
+              >
+                Cancel
+              </button>
+              <button type="submit" className="btn btn-primary">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
 
 export default UserProfile;
+
