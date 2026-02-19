@@ -16,6 +16,7 @@ import ProfilePaymentSuccess from "../pages/DashBoard/Payment/ProfilePaymentSucc
 import PaymentHistory from "../pages/DashBoard/PaymentHistory/PaymentHistory";
 import StaffTask from "../pages/DashBoard/StaffTask/StaffTask";
 import UserManager from "../pages/DashBoard/UserManager/UserManager";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home/Home";
 import Impact from "../pages/Impact/Impact";
 import ReportDetailPage from "../pages/ReportDetailPage/ReportDetailPage";
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,

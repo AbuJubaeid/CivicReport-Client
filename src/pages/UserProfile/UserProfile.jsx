@@ -148,7 +148,8 @@ const UserProfile = () => {
           </button>
 
           
-          <button
+          { role === "user" && 
+            <button
             onClick={() => handleIncreasePriority(localUser)}
             disabled={isHighPriority}
             className={`btn btn-primary ${
@@ -159,7 +160,7 @@ const UserProfile = () => {
           >
             {isHighPriority ? "High Priority Enabled" : "Increase Priority "}
             {!isHighPriority && <small>(Pay-1000৳)</small>}
-          </button>
+          </button>}
         </div>
       </div>
 

@@ -57,7 +57,7 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {user && (
+      {role === "user" && (
         <li>
           <NavLink
             className={({ isActive }) =>
