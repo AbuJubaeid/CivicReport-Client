@@ -26,24 +26,6 @@ const MyReports = () => {
     },
   });
 
-  // const handlePayment = async(report) => {
-  //   const isPaid = report.paymentStatus === "paid";
-
-  //   if (isPaid) {
-  //     return Swal.fire("Info", "Payment already completed", "info");
-  //   }
-
-  //   const paymentInfo = {
-  //           issue: report.issue,
-  //           reportId: report._id,
-  //           email: report.email,
-  //       }
-
-  //       const res = await axiosSecure.post('/create-checkout-session', paymentInfo)
-  //       console.log(res.data)
-  //       window.location.href = res.data.url
-  // };
-
   const handlePayment = async (report) => {
     const isPaid = report.paymentStatus === "paid";
 
@@ -59,16 +41,16 @@ const MyReports = () => {
 
     try {
       const res = await axiosSecure.post(
-        "/create-checkout-session/me", // ✅ FIXED ENDPOINT
+        "/create-checkout-session/me", 
         paymentInfo,
       );
 
-      // ✅ SAFETY CHECK
+      
       if (!res.data?.url) {
         throw new Error("Stripe URL not received");
       }
 
-      // ✅ CORRECT REDIRECT
+     
       window.location.href = res.data.url;
     } catch (err) {
       console.error("Payment Error:", err);
@@ -76,7 +58,7 @@ const MyReports = () => {
     }
   };
 
-  /* DELETE */
+  
   const handleDeleteReport = (id) => {
     Swal.fire({
       title: "Are you sure?",
