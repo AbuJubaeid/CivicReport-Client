@@ -138,7 +138,8 @@ const Navbar = () => {
                 {user.displayName}
               </li>
 
-              {/* Dashboard */}
+              {/* user Dashboard */}
+
               {role === "user" && (
                 <li>
                   <NavLink
@@ -148,6 +149,24 @@ const Navbar = () => {
                       } is-drawer-close tooltip tooltip-right`
                     }
                     to="/dashboard/user-dashboard"
+                  >
+                    <span className="is-drawer-close:hidden">
+                      Dashboard
+                    </span>
+                  </NavLink>
+                </li>
+              )}
+
+              {/* staff Dashboard */}
+              {role === "staff" && (
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    to="/dashboard/staff-dashboard"
                   >
                     <span className="is-drawer-close:hidden">
                       Dashboard

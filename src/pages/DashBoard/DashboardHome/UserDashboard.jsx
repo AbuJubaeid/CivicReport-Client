@@ -16,7 +16,7 @@ const UserDashboard = () => {
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useHook();
 
-  // 🔹 get current user
+  
   const { data: currentUser = {}, isLoading: userLoading } = useQuery({
     queryKey: ["currentUser"],
     queryFn: async () => {
@@ -25,7 +25,7 @@ const UserDashboard = () => {
     },
   });
 
-  // 🔹 get all reports
+  
   const { data: reports = [], isLoading: reportLoading } = useQuery({
     queryKey: ["allReports"],
     queryFn: async () => {
@@ -42,7 +42,7 @@ const UserDashboard = () => {
     );
   }
 
-  // 🔹 only this user's reports
+  
   const myReports = reports.filter((r) => r.email === user?.email);
 
   const pendingCount = myReports.filter(
@@ -65,7 +65,7 @@ const UserDashboard = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 space-y-8">
-      {/* 🔹 Welcome */}
+     
       <div className="flex items-center gap-4">
         <img
           src={currentUser.photoURL}
@@ -82,7 +82,7 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      {/* 🔹 Summary Cards */}
+      
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <div className="card bg-base-100 shadow-xl">
           <div className="card-body flex-row items-center gap-4">
@@ -125,7 +125,7 @@ const UserDashboard = () => {
         </div>
       </div>
 
-      {/* 🔹 Chart */}
+    
       <div className="card bg-base-100 shadow-2xl">
         <div className="card-body">
           <h3 className="text-xl font-semibold mb-4">
