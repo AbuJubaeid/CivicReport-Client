@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useHook from "../../hooks/useHook";
 
@@ -17,7 +18,14 @@ const AllReport = () => {
   
   const [upVotes, setUpVotes] = useState({});
 
-  const { data: reports = [], isLoading } = useQuery({
+  
+  const [votedReports, setVotedReports] = useState({});
+
+  const {
+    data: reports = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["reports", category, status, priority, search],
     queryFn: async () => {
       const params = new URLSearchParams();
@@ -34,13 +42,35 @@ const AllReport = () => {
   });
 
   
-  const handleUpVote = (report) => {
+  const handleUpVote = async (report) => {
+   
     if (report.email === user?.email) return;
 
+   
+    if (votedReports[report._id]) {
+      Swal.fire({
+        icon: "warning",
+        title: "Already Voted",
+        text: "You cannot upvote the same report twice.",
+      });
+      return;
+    }
+
+    
     setUpVotes((prev) => ({
       ...prev,
-      [report._id]: (prev[report._id] || 0) + 1,
+      [report._id]: (prev[report._id] || report.upVotes || 0) + 1,
     }));
+
+    
+    setVotedReports((prev) => ({
+      ...prev,
+      [report._id]: true,
+    }));
+
+    
+    await axiosSecure.patch(`/reports/upvote/${report._id}`);
+    refetch();
   };
 
   if (loading || isLoading) {
@@ -100,12 +130,19 @@ const AllReport = () => {
       </div>
 
       {reports.length === 0 && (
-        <p className="text-center text-gray-500 py-20">No reports found</p>
+        <p className="text-center text-gray-500 py-20">
+          No reports found
+        </p>
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {reports.map((report) => {
           const isOwner = report.email === user?.email;
+
+          const voteCount =
+            upVotes[report._id] !== undefined
+              ? upVotes[report._id]
+              : report.upVotes || 0;
 
           return (
             <div
@@ -138,7 +175,9 @@ const AllReport = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="badge badge-outline">{report.category}</span>
+                  <span className="badge badge-outline">
+                    {report.category}
+                  </span>
                   {report.priority && (
                     <span className="badge badge-outline">
                       {report.priority}
@@ -156,16 +195,15 @@ const AllReport = () => {
                 </div>
 
                 <div className="flex justify-between items-center">
-                  
                   <button
                     onClick={() => handleUpVote(report)}
                     disabled={isOwner}
-                    className={`flex items-center gap-1 text-sm ${
+                    className={`flex items-center cursor-pointer gap-1 text-sm ${
                       isOwner ? "opacity-40 cursor-not-allowed" : ""
                     }`}
                   >
                     <FaArrowUp />
-                    <span>{upVotes[report._id] || 0}</span>
+                    <span>{voteCount}</span>
                   </button>
 
                   <Link
