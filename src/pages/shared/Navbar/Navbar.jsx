@@ -138,152 +138,23 @@ const Navbar = () => {
                 {user.displayName}
               </li>
 
-              {/* Dashboard sub-dropdown */}
-              <li tabIndex={0} className="dropdown dropdown-end">
-                <span className="justify-between cursor-pointer">
-                  Dashboard
-                  <svg
-                    className="fill-current"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
+              {/* Dashboard */}
+              {role === "user" && (
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    to="/dashboard/user-dashboard"
                   >
-                    <path d="M7 10l5 5 5-5H7z" />
-                  </svg>
-                </span>
-                {/* sub dropdown start  */}
-                <ul className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-0">
-                  {/* user role dropdown */}
-                  {role === "user" && (
-                    <>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            `${
-                              isActive ? "active-link" : "inactive-link"
-                            } is-drawer-close tooltip tooltip-right`
-                          }
-                          
-                          to="/dashboard/my-reports"
-                        >
-                          <span className="is-drawer-close:hidden">
-                            My Reports
-                          </span>
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            `${
-                              isActive ? "active-link" : "inactive-link"
-                            } is-drawer-close tooltip tooltip-right`
-                          }
-                          
-                          to="/dashboard/payment-history"
-                        >
-                          <span className="is-drawer-close:hidden">
-                            My Payments
-                          </span>
-                        </NavLink>
-                      </li>
-                    </>
-                  )}
-
-                  {/* staff route dropdown */}
-                  {role === "staff" && (
-                    <> 
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            `${
-                              isActive ? "active-link" : "inactive-link"
-                            } is-drawer-close tooltip tooltip-right`
-                          }
-                          
-                          to="/dashboard/staff-task"
-                        >
-                          <span className="is-drawer-close:hidden">
-                            Staff Task
-                          </span>
-                        </NavLink>
-                      </li>
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            `${
-                              isActive ? "active-link" : "inactive-link"
-                            } is-drawer-close tooltip tooltip-right`
-                          }
-                          
-                          to="/dashboard/completed-report"
-                        >
-                          <span className="is-drawer-close:hidden">
-                            Completed Report
-                          </span>
-                        </NavLink>
-                      </li>
-                    </>
-                  )}
-
-                  {/* admin route dropdown */}
-                  {role === "admin" && (
-                    <>
-                      {/* approve staff */}
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            `${
-                              isActive ? "active-link" : "inactive-link"
-                            } is-drawer-close tooltip tooltip-right`
-                          }
-                          
-                          to="/dashboard/approve-staff"
-                        >
-                          <span className="is-drawer-close:hidden">
-                            Approve Staff
-                          </span>
-                        </NavLink>
-                      </li>
-
-                      {/* assign staff */}
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            `${
-                              isActive ? "active-link" : "inactive-link"
-                            } is-drawer-close tooltip tooltip-right`
-                          }
-                          
-                          to="/dashboard/assign-staff"
-                        >
-                          <span className="is-drawer-close:hidden">
-                            Assign Staff
-                          </span>
-                        </NavLink>
-                      </li>
-
-                      {/* user manager */}
-                      <li>
-                        <NavLink
-                          className={({ isActive }) =>
-                            `${
-                              isActive ? "active-link" : "inactive-link"
-                            } is-drawer-close tooltip tooltip-right`
-                          }
-                          data-tip="User Manager"
-                          to="/dashboard/user-manager"
-                        >
-                          <span className="is-drawer-close:hidden">
-                            User Manager
-                          </span>
-                        </NavLink>
-                      </li>
-                    </>
-                  )}
-                </ul>
-                {/* sub dropdown close  */}
-              </li>
+                    <span className="is-drawer-close:hidden">
+                      Dashboard
+                    </span>
+                  </NavLink>
+                </li>
+              )}
 
               <li>
                 <button

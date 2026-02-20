@@ -9,6 +9,7 @@ import CreateIssue from "../pages/CreateIssue/CreateIssue";
 import ApproveStaffs from "../pages/DashBoard/ApproveStaffs/ApproveStaffs";
 import AssignStaff from "../pages/DashBoard/AssignStaff/AssignStaff";
 import CompletedReport from "../pages/DashBoard/CompletedReport/CompletedReport";
+import UserDashboard from "../pages/DashBoard/DashboardHome/UserDashboard";
 import MyReports from "../pages/DashBoard/MyReports/MyReports";
 import PaymentCancell from "../pages/DashBoard/Payment/PaymentCancell";
 import PaymentSuccess from "../pages/DashBoard/Payment/PaymentSuccess";
@@ -101,6 +102,10 @@ export const router = createBrowserRouter([
       {
         path: "my-reports",
         Component: MyReports,
+      },
+      {
+        path: "user-dashboard",
+        Component: UserDashboard,
       },
       {
         path: "payment-success",
