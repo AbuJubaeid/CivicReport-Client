@@ -174,6 +174,22 @@ const Navbar = () => {
                   </NavLink>
                 </li>
               )}
+              {role === "admin" && (
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "active-link" : "inactive-link"
+                      } is-drawer-close tooltip tooltip-right`
+                    }
+                    to="/dashboard/admin-dashboard"
+                  >
+                    <span className="is-drawer-close:hidden">
+                      Dashboard
+                    </span>
+                  </NavLink>
+                </li>
+              )}
 
               <li>
                 <button

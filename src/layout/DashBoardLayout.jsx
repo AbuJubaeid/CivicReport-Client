@@ -78,7 +78,9 @@ const DashBoardLayout = () => {
             </li>
 
             {/* my dashboard links */}
-            <li>
+            { role === "user" &&
+              <>
+              <li>
               <NavLink
                 className={({ isActive }) =>
                   `${
@@ -106,6 +108,8 @@ const DashBoardLayout = () => {
                 <span className="is-drawer-close:hidden">Payment History</span>
               </NavLink>
             </li>
+              </>
+              }
             
             {/* role based task start here */}
 
