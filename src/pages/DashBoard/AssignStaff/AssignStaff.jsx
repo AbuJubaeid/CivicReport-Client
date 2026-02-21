@@ -8,7 +8,7 @@ const AssignStaff = () => {
   const staffModalRef = useRef();
   const [selectedReport, setSelectedReport] = useState();
 
-  const { data: reports = [], refetch:reportRefetch } = useQuery({
+  const { data: reports = [], refetch: reportRefetch } = useQuery({
     queryKey: ["reports", "pending"],
     queryFn: async () => {
       const res = await axiosSecure.get("/reports?reportStatus=pending");
@@ -18,10 +18,10 @@ const AssignStaff = () => {
 
   const { data: staffs = [], refetch: staffRefetch } = useQuery({
     queryKey: ["reports", "available"],
-    enabled:!!selectedReport,
+    enabled: !!selectedReport,
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/staffs?status=approved&workStatus=available`
+        `/staffs?status=approved&workStatus=available`,
       );
       return res.data;
     },
@@ -33,43 +33,42 @@ const AssignStaff = () => {
   };
 
   const handleAssignStaff = (staff) => {
+    
     const staffInfo = {
       staffId: staff._id,
       staffName: staff.name,
       staffEmail: staff.email,
-      reportId: selectedReport._id,
     };
 
-    axiosSecure.patch(`/reports/${selectedReport._id}`, staffInfo).then((res) => {
-      if (res.data.modifiedCount) {
-        staffModalRef.current.close();
-        reportRefetch();
-        staffRefetch()
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Staff assigned",
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      }
-    });
-  };
+    axiosSecure
+      .patch(`/reports/${selectedReport._id}/assign`, staffInfo)
+      .then((res) => {
+        if (res.data.success) {
+          staffModalRef.current.close();
+          reportRefetch();
+          staffRefetch();
 
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Staff assigned & report in progress",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        }
+      });
+  };
   return (
     <div className="p-4 sm:p-6 lg:p-8">
-      
       <div className="mb-6">
         <h2 className="text-2xl sm:text-3xl font-semibold text-slate-800">
           Assign Staff
         </h2>
         <p className="text-slate-500 mt-1 text-sm sm:text-base">
-          Pending Reports:{" "}
-          <span className="font-medium">{reports.length}</span>
+          Pending Reports: <span className="font-medium">{reports.length}</span>
         </p>
       </div>
 
-      
       <div className="hidden md:block overflow-x-auto border border-slate-200 rounded-xl">
         <table className="min-w-full text-sm text-left">
           <thead className="bg-slate-100 text-slate-600 uppercase text-xs tracking-wider">
@@ -89,15 +88,11 @@ const AssignStaff = () => {
                 <td className="px-4 py-3 font-medium text-slate-700">
                   {report.issue}
                 </td>
-                <td className="px-4 py-3 text-slate-600">
-                  {report.location}
-                </td>
+                <td className="px-4 py-3 text-slate-600">{report.location}</td>
                 <td className="px-4 py-3 text-slate-600">
                   {report.paymentStatus}
                 </td>
-                <td className="px-4 py-3 text-slate-600">
-                  {report.createdAt}
-                </td>
+                <td className="px-4 py-3 text-slate-600">{report.createdAt}</td>
                 <td className="px-4 py-3 text-center">
                   <button
                     onClick={() => openStaffModal(report)}
@@ -110,38 +105,6 @@ const AssignStaff = () => {
             ))}
           </tbody>
         </table>
-      </div>
-
-     
-      <div className="md:hidden space-y-4">
-        {reports.map((report, index) => (
-          <div
-            key={report._id}
-            className="border border-slate-200 rounded-lg p-4 shadow-sm"
-          >
-            <p className="text-sm text-slate-500 mb-1">
-              #{index + 1}
-            </p>
-            <h3 className="font-semibold text-slate-800">
-              {report.issue}
-            </h3>
-            <p className="text-sm text-slate-600 mt-1">
-              📍 {report.location}
-            </p>
-            <p className="text-sm text-slate-600">
-              💳 {report.paymentStatus}
-            </p>
-            <p className="text-sm text-slate-500">
-              🕒 {report.createdAt}
-            </p>
-            <button
-              onClick={() => openStaffModal(report)}
-              className="mt-3 w-full py-2 rounded-md bg-slate-800 text-white text-sm hover:bg-slate-700 transition"
-            >
-              Assign Staff
-            </button>
-          </div>
-        ))}
       </div>
 
       {/* Modal */}
@@ -171,9 +134,7 @@ const AssignStaff = () => {
                     <td className="px-4 py-3 font-medium text-slate-700">
                       {staff.name}
                     </td>
-                    <td className="px-4 py-3 text-slate-600">
-                      {staff.email}
-                    </td>
+                    <td className="px-4 py-3 text-slate-600">{staff.email}</td>
                     <td className="px-4 py-3 text-center">
                       <button
                         onClick={() => handleAssignStaff(staff)}
@@ -202,4 +163,3 @@ const AssignStaff = () => {
 };
 
 export default AssignStaff;
-

@@ -41,7 +41,7 @@ const MyReports = () => {
 
     try {
       const res = await axiosSecure.post(
-        "/create-checkout-session/me", 
+        "/create-checkout-session", 
         paymentInfo,
       );
 

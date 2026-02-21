@@ -58,6 +58,7 @@ const Navbar = () => {
       </li>
 
       {role === "user" && (
+        <>
         <li>
           <NavLink
             className={({ isActive }) =>
@@ -68,6 +69,18 @@ const Navbar = () => {
             Create Report
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? "active-link" : "inactive-link"
+            }
+            to="/staff"
+          >
+            Be a staff
+          </NavLink>
+        </li>
+        </>
+        
       )}
     </>
   );
@@ -114,7 +127,7 @@ const Navbar = () => {
       </div>
 
       {/* Navbar Center */}
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center ml-20  hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
 
