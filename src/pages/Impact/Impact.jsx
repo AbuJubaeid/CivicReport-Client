@@ -2,7 +2,7 @@ const Impact = () => {
   return (
     <div className="text-slate-800">
 
-      {/* ===================== HERO ===================== */}
+      
       <section className="py-24 text-center">
         <div className="max-w-4xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
@@ -14,7 +14,7 @@ const Impact = () => {
         </div>
       </section>
 
-      {/* ===================== IMPACT STATISTICS ===================== */}
+     
       <section className="py-20 max-w-5xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-semibold mb-12">
           Key Community Highlights
@@ -39,7 +39,7 @@ const Impact = () => {
         </div>
       </section>
 
-      {/* ===================== PLATFORM INSIGHTS ===================== */}
+      
       <section className="py-20 max-w-6xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-semibold mb-12">
           Platform Insights
@@ -72,7 +72,7 @@ const Impact = () => {
         </div>
       </section>
 
-      {/* ===================== TIMELINE / GROWTH ===================== */}
+      
       <section className="py-20 max-w-4xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">
           CivicReport Growth Timeline

@@ -16,7 +16,7 @@ const Banner = () => {
       <div>
         <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
+          
           <div>
             <span className="inline-block mb-4 px-4 py-1 rounded-full border border-slate-300 text-sm text-slate-600">
               Civic Issue Management Platform
@@ -48,7 +48,7 @@ const Banner = () => {
             </div>
           </div>
 
-          {/* Right Visual */}
+          
           <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
             <h3 className="text-lg font-medium text-slate-800 mb-6">
               Issue Resolution Flow

@@ -25,7 +25,7 @@ const LatestResolvedReports = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
-      {/* Header */}
+      
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-bold text-base-content">
           Recently Solved Reports
@@ -37,7 +37,7 @@ const LatestResolvedReports = () => {
         </p>
       </div>
 
-      {/* Cards */}
+      
       {reports.length === 0 ? (
         <div className="text-center py-20 text-gray-500">
           No solved reports found.
@@ -49,7 +49,7 @@ const LatestResolvedReports = () => {
               key={report._id}
               className="card bg-base-100 border border-base-200 shadow-sm hover:shadow-md transition flex flex-col"
             >
-              {/* Image */}
+              
               <figure className="h-44 bg-base-200 overflow-hidden">
                 <img
                   src={

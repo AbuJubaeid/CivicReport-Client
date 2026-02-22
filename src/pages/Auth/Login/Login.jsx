@@ -41,11 +41,11 @@ const Login = () => {
   return (
     <div className="min-h-screen my-6 flex flex-col lg:flex-row">
 
-      {/* LEFT SIDE */}
+      
       <div className="lg:w-1/2 flex items-center justify-center px-6 lg:px-24">
         <div className="w-full max-w-md">
 
-          {/* Heading */}
+          
           <h2 className="text-3xl font-semibold text-center text-slate-800 mb-2">
             Welcome back
           </h2>
@@ -53,7 +53,7 @@ const Login = () => {
             Sign in to continue managing civic reports transparently.
           </p>
 
-          {/* FORM (Card Removed) */}
+          {/* FORM */}
           <form
             onSubmit={handleSubmit(handleSignin)}
             className="space-y-7"
@@ -94,7 +94,7 @@ const Login = () => {
                 transition"
               />
 
-              {/* Eye Icon */}
+              
               <div
                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-slate-500"
                 onClick={() => setShowPassword(!showPassword)}
@@ -134,7 +134,7 @@ const Login = () => {
               </button>
             </div>
 
-            {/* Login button */}
+            
             <button
               type="submit"
               className="w-full py-3.5 rounded-lg
@@ -146,17 +146,17 @@ const Login = () => {
             </button>
           </form>
 
-          {/* Divider */}
+          
           <div className="flex items-center gap-4 my-8">
             <span className="flex-1 h-px bg-slate-200" />
             <span className="text-sm text-slate-500">or</span>
             <span className="flex-1 h-px bg-slate-200" />
           </div>
 
-          {/* Social login */}
+          
           <SocialLogin />
 
-          {/* Register */}
+          
           <p className="mt-8 text-sm text-center text-slate-600">
             Don’t have an account?
             <Link
@@ -170,7 +170,7 @@ const Login = () => {
         </div>
       </div>
 
-      {/* RIGHT SIDE IMAGE */}
+      
       <div className="lg:w-1/2 hidden lg:flex items-center justify-start pl-16">
         <img
           src="https://i.ibb.co.com/VR3fhBB/login.png"

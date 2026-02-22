@@ -54,11 +54,7 @@ const ApproveStaffs = () => {
         axiosSecure.delete(`/staffs/${id}`).then((res) => {
           if (res.data.deletedCount) {
             refetch();
-            Swal.fire(
-              "Deleted!",
-              "Staff request has been deleted.",
-              "success"
-            );
+            Swal.fire("Deleted!", "Staff request has been deleted.", "success");
           }
         });
       }
@@ -67,7 +63,6 @@ const ApproveStaffs = () => {
 
   return (
     <div className="p-4 sm:p-6 lg:p-8">
-      {/* Heading */}
       <div className="mb-6">
         <h2 className="text-2xl sm:text-3xl font-semibold text-slate-800">
           Staff Approval Requests
@@ -78,7 +73,6 @@ const ApproveStaffs = () => {
         </p>
       </div>
 
-      {/* Table Container */}
       <div className="overflow-x-auto border border-slate-200 rounded-xl">
         <table className="min-w-full text-sm text-left">
           <thead className="bg-slate-100 text-slate-600 uppercase text-xs tracking-wider">
@@ -95,20 +89,13 @@ const ApproveStaffs = () => {
 
           <tbody className="divide-y divide-slate-200">
             {staffs.map((staff, index) => (
-              <tr
-                key={staff._id}
-                className="hover:bg-slate-50 transition"
-              >
+              <tr key={staff._id} className="hover:bg-slate-50 transition">
                 <td className="px-4 py-3">{index + 1}</td>
                 <td className="px-4 py-3 font-medium text-slate-700">
                   {staff.name}
                 </td>
-                <td className="px-4 py-3 text-slate-600">
-                  {staff.email}
-                </td>
-                <td className="px-4 py-3 text-slate-600">
-                  {staff.address}
-                </td>
+                <td className="px-4 py-3 text-slate-600">{staff.email}</td>
+                <td className="px-4 py-3 text-slate-600">{staff.address}</td>
 
                 <td
                   className={`px-4 py-3 font-medium ${
@@ -120,15 +107,10 @@ const ApproveStaffs = () => {
                   {staff.status}
                 </td>
 
-                <td className="px-4 py-3 text-slate-600">
-                  {staff.workStatus}
-                </td>
+                <td className="px-4 py-3 text-slate-600">{staff.workStatus}</td>
 
-                {/* Actions with Tooltip */}
                 <td className="px-4 py-3">
                   <div className="flex justify-center gap-3">
-
-                    {/* Approve */}
                     <div className="relative group">
                       <button
                         onClick={() => handleApprove(staff)}
@@ -136,14 +118,15 @@ const ApproveStaffs = () => {
                       >
                         <FaUserCheck size={14} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 
+                      <span
+                        className="absolute -top-8 left-1/2 -translate-x-1/2 
                         whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white 
-                        opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                        opacity-0 group-hover:opacity-100 transition pointer-events-none"
+                      >
                         Approve
                       </span>
                     </div>
 
-                    {/* Reject */}
                     <div className="relative group">
                       <button
                         onClick={() => handleReject(staff)}
@@ -151,14 +134,15 @@ const ApproveStaffs = () => {
                       >
                         <IoPersonRemove size={15} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 
+                      <span
+                        className="absolute -top-8 left-1/2 -translate-x-1/2 
                         whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white 
-                        opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                        opacity-0 group-hover:opacity-100 transition pointer-events-none"
+                      >
                         Reject
                       </span>
                     </div>
 
-                    {/* Delete */}
                     <div className="relative group">
                       <button
                         onClick={() => handleDelete(staff._id)}
@@ -166,13 +150,14 @@ const ApproveStaffs = () => {
                       >
                         <FaTrashAlt size={13} />
                       </button>
-                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 
+                      <span
+                        className="absolute -top-8 left-1/2 -translate-x-1/2 
                         whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white 
-                        opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                        opacity-0 group-hover:opacity-100 transition pointer-events-none"
+                      >
                         Delete
                       </span>
                     </div>
-
                   </div>
                 </td>
               </tr>
@@ -185,5 +170,3 @@ const ApproveStaffs = () => {
 };
 
 export default ApproveStaffs;
-
-

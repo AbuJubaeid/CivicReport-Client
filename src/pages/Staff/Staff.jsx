@@ -25,14 +25,14 @@ const Staff = () => {
           showConfirmButton: false,
           timer: 2500,
         });
-        reset(); // clear the form after successful submission
+        reset();
       }
     });
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row items-center justify-center p-4 md:p-10">
-      {/* Optional left-side illustration */}
+     
       <div className="hidden md:flex md:w-1/2 items-center justify-center">
         <img
           src="https://i.ibb.co.com/Z12GbS8T/staff-register.png"
@@ -106,7 +106,7 @@ const Staff = () => {
             )}
           </div>
 
-          {/* Submit */}
+          
           <div>
             <button
               type="submit"

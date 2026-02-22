@@ -79,7 +79,7 @@ const UserManager = () => {
         Users ({users.length})
       </h2>
 
-      {/* Search */}
+      
       <div className="mb-6 flex justify-center md:justify-start">
         <div className="relative w-full max-w-md">
           <input
@@ -102,7 +102,7 @@ const UserManager = () => {
         </div>
       </div>
 
-      {/* User Table */}
+      
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-200 divide-y divide-gray-200">
           <thead className="bg-gray-50">

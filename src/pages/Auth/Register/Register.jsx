@@ -64,7 +64,7 @@ const Register = () => {
 
           updateProfileFunc(userProfile)
             .then(() => {
-              // ✅ SIGN OUT AFTER EVERYTHING IS DONE
+             
               signOutFunc()
                 .then(() => {
                   navigate("/login");
@@ -85,7 +85,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row bg-base-200">
-      {/* LEFT SIDE: FORM */}
+      
       <div className="lg:w-1/2 flex flex-col text-center justify-center px-12 py-16">
         <h1 className="text-5xl font-bold mb-4">Register Now!</h1>
         <p className="text-gray-600 mb-8">
@@ -196,7 +196,7 @@ const Register = () => {
         </p>
       </div>
 
-      {/* RIGHT SIDE IMAGE */}
+      
       <div className="lg:w-1/2 hidden lg:flex items-center justify-center px-12">
         <img
           src="https://i.ibb.co.com/XT1Ppnb/register.png"

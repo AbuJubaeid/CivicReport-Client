@@ -66,7 +66,7 @@ const CreateIssue = () => {
     <div className="min-h-screen bg-slate-50 py-10 px-4">
       <div className="max-w-4xl mx-auto">
 
-        {/* Page Header */}
+        
         <div className="mb-10 text-center">
           <h2 className="text-3xl font-semibold text-slate-800">
             Report a Civic Issue
@@ -76,7 +76,7 @@ const CreateIssue = () => {
           </p>
         </div>
 
-        {/* Form Card */}
+        
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10">
 
           <form
@@ -84,7 +84,7 @@ const CreateIssue = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
 
-            {/* Name */}
+            
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Name
@@ -102,7 +102,7 @@ const CreateIssue = () => {
               )}
             </div>
 
-            {/* Email */}
+            
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Email
@@ -120,7 +120,7 @@ const CreateIssue = () => {
               )}
             </div>
 
-            {/* Image */}
+            
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Issue Image
@@ -137,7 +137,7 @@ const CreateIssue = () => {
               )}
             </div>
 
-            {/* Issue Title */}
+            
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Issue Title
@@ -154,7 +154,7 @@ const CreateIssue = () => {
               )}
             </div>
 
-            {/* Category */}
+           
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Category
@@ -175,7 +175,7 @@ const CreateIssue = () => {
               </select>
             </div>
 
-            {/* Location */}
+            
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">
                 Location
@@ -194,7 +194,7 @@ const CreateIssue = () => {
               )}
             </div>
 
-            {/* Submit */}
+            
             <div className="md:col-span-2 flex justify-end mt-4">
               <button
                 type="submit"

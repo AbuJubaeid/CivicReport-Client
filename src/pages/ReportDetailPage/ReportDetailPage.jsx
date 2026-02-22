@@ -43,7 +43,7 @@ const ReportDetailPage = () => {
       </h2>
 
       <div className="bg-white shadow-md rounded-xl overflow-hidden">
-        {/* Report Image */}
+        
         <div className="w-full h-64 md:h-96 overflow-hidden">
           <img
             src={report.photoURL || "https://placehold.co/800x500?text=No+Image"}
@@ -52,7 +52,7 @@ const ReportDetailPage = () => {
           />
         </div>
 
-        {/* Report Info */}
+        
         <div className="p-6 md:p-8 space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>

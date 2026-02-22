@@ -22,7 +22,7 @@ const Footer = () => {
 
         
         <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-          {/* About & Impact */}
+          
           <div className="flex gap-3 text-sm font-semibold">
             <Link to={'about-us'} className="hover:underline">About Us</Link>
             <Link to={'impact'} className="hover:underline">Impact</Link>

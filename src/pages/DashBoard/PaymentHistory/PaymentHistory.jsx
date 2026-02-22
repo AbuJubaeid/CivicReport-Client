@@ -27,7 +27,7 @@ const PaymentHistory = () => {
     );
   }
 
-//  pdf file create
+
   const downloadReceiptPDF = (payment) => {
     const doc = new jsPDF();
 
@@ -119,7 +119,7 @@ const PaymentHistory = () => {
         </table>
       </div>
 
-      {/* Receipt Modal */}
+      {/* Modal */}
       {selectedPayment && (
         <dialog open className="modal modal-bottom sm:modal-middle">
           <div className="modal-box">
