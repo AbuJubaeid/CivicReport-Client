@@ -15,11 +15,12 @@ const AllReport = () => {
   const [priority, setPriority] = useState("");
   const [search, setSearch] = useState("");
 
-  
   const [upVotes, setUpVotes] = useState({});
+  const [votedReports, setVotedReports] = useState({});
 
   
-  const [votedReports, setVotedReports] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const reportsPerPage = 9;
 
   const {
     data: reports = [],
@@ -41,12 +42,9 @@ const AllReport = () => {
     },
   });
 
-  
   const handleUpVote = async (report) => {
-   
     if (report.email === user?.email) return;
 
-   
     if (votedReports[report._id]) {
       Swal.fire({
         icon: "warning",
@@ -56,19 +54,16 @@ const AllReport = () => {
       return;
     }
 
-    
     setUpVotes((prev) => ({
       ...prev,
       [report._id]: (prev[report._id] || report.upVotes || 0) + 1,
     }));
 
-    
     setVotedReports((prev) => ({
       ...prev,
       [report._id]: true,
     }));
 
-    
     await axiosSecure.patch(`/reports/upvote/${report._id}`);
     refetch();
   };
@@ -80,6 +75,12 @@ const AllReport = () => {
       </div>
     );
   }
+
+  
+  const indexOfLastReport = currentPage * reportsPerPage;
+  const indexOfFirstReport = indexOfLastReport - reportsPerPage;
+  const currentReports = reports.slice(indexOfFirstReport, indexOfLastReport);
+  const totalPages = Math.ceil(reports.length / reportsPerPage);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
@@ -130,15 +131,12 @@ const AllReport = () => {
       </div>
 
       {reports.length === 0 && (
-        <p className="text-center text-gray-500 py-20">
-          No reports found
-        </p>
+        <p className="text-center text-gray-500 py-20">No reports found</p>
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {reports.map((report) => {
+        {currentReports.map((report) => {
           const isOwner = report.email === user?.email;
-
           const voteCount =
             upVotes[report._id] !== undefined
               ? upVotes[report._id]
@@ -162,7 +160,6 @@ const AllReport = () => {
                   <h3 className="font-semibold text-lg line-clamp-2">
                     {report.issue}
                   </h3>
-
                   <span
                     className={`badge capitalize
                       ${report.reportStatus === "pending" && "badge-warning"}
@@ -175,13 +172,9 @@ const AllReport = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 mt-2">
-                  <span className="badge badge-outline">
-                    {report.category}
-                  </span>
+                  <span className="badge badge-outline">{report.category}</span>
                   {report.priority && (
-                    <span className="badge badge-outline">
-                      {report.priority}
-                    </span>
+                    <span className="badge badge-outline">{report.priority}</span>
                   )}
                 </div>
 
@@ -189,9 +182,7 @@ const AllReport = () => {
 
                 <div className="text-sm text-gray-500 flex justify-between">
                   <span>{report.name}</span>
-                  <span>
-                    {new Date(report.createdAt).toLocaleDateString()}
-                  </span>
+                  <span>{new Date(report.createdAt).toLocaleDateString()}</span>
                 </div>
 
                 <div className="flex justify-between items-center">
@@ -218,10 +209,44 @@ const AllReport = () => {
           );
         })}
       </div>
+
+      
+      {totalPages > 1 && (
+        <div className="flex justify-center gap-2 mt-8">
+          <button
+            className="btn btn-sm"
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </button>
+
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              className={`btn btn-sm ${
+                currentPage === i + 1 ? "btn-active" : ""
+              }`}
+              onClick={() => setCurrentPage(i + 1)}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            className="btn btn-sm"
+            onClick={() =>
+              setCurrentPage((p) => Math.min(p + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
 export default AllReport;
-
 

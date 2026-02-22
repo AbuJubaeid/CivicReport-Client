@@ -2,7 +2,7 @@
 const KeyFeatures = () => {
     return (
         <div>
-            <section className="py-20 bg-slate-50">
+            <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-semibold text-slate-800 mb-4">
             Key Features

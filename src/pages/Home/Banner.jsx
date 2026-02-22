@@ -14,7 +14,7 @@ const Banner = () => {
 };
     return (
       <div>
-        <section className="py-24 bg-white">
+        <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div>

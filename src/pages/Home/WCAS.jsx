@@ -2,7 +2,7 @@
 const WCAS = () => {
     return (
         <div>
-            <section className="py-20 bg-slate-50">
+            <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-semibold text-slate-800">

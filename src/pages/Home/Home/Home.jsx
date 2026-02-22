@@ -10,9 +10,8 @@ import WCAS from "../WCAS";
 
 const Home = () => {
 
-
   return (
-    <div className="bg-slate-50">
+    <div className="">
        
       <div>
         <Banner></Banner>

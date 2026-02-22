@@ -26,7 +26,7 @@ const AboutUs = () => {
     <div className="text-slate-800">
 
       
-      <section className="py-24 text-center bg-gradient-to-r from-blue-50 to-slate-50">
+      <section className="py-24 text-center">
         <div className="max-w-3xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">About CivicReport</h1>
           <p className="text-lg md:text-xl text-slate-600 leading-relaxed">
@@ -37,7 +37,7 @@ const AboutUs = () => {
 
      
       <section className="py-20 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
-        <div className="bg-white p-8 rounded-3xl shadow-lg hover:scale-105 transition-transform">
+        <div className=" p-8 rounded-3xl shadow-lg hover:scale-105 transition-transform">
           <div className="text-blue-500 text-4xl mb-4">🎯</div>
           <h2 className="text-2xl font-semibold mb-3">Our Mission</h2>
           <p className="text-slate-600 text-lg leading-relaxed">
@@ -110,7 +110,7 @@ const AboutUs = () => {
       </section>
 
      
-      <section className="py-20 max-w-6xl mx-auto px-6 bg-slate-50">
+      <section className="py-20 max-w-6xl mx-auto px-6">
         <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">Testimonials</h2>
         <Swiper
           modules={[Navigation, Pagination, Autoplay]}
