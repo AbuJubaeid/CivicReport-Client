@@ -4,6 +4,18 @@ CivicReport is a citizen-centric platform designed to report, track, and resolve
 
 ---
 
+## Login Information
+
+admin==>
+email:jubaeid3@gmail.com
+password: Jubaeid@123
+staff==>
+email: siam@gmail.com/ tawfiq@gmail.com
+password: Siam@123/ Tawfiq@123
+user==>
+email: habib@gmail.com
+password: Habib@123
+
 ## Table of Contents
 
 1. [Home Page](#home-page)
