@@ -4,6 +4,13 @@ CivicReport is a citizen-centric platform designed to report, track, and resolve
 
 ---
 
+## Key Points
+
+1. Multiple users
+2. Stripe Payment system
+3. React Hook Form
+4. React Query
+
 ## Login Information
 
 admin==>
