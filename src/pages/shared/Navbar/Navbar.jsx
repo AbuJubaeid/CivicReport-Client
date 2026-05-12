@@ -119,7 +119,7 @@ const Navbar = () => {
         >
           <img
             className="w-8 h-8"
-            src="https://i.ibb.co.com/s9yzFJsz/logo.png"
+            src="../../../assets/image/logo.png"
             alt="logo"
           />
           CivicReport

@@ -16,51 +16,117 @@ const CreateIssue = () => {
   const { user } = useHook();
   const navigate = useNavigate();
 
-  const handleCreateReport = (data) => {
-    const profileImg = data.image[0];
+  // const handleCreateReport = (data) => {
+  //   const profileImg = data.image[0];
+  //   const formData = new FormData();
+  //   formData.append("image", profileImg);
+
+  //   const imageApiURL = `https://api.imgbb.com/1/upload?key=${
+  //     import.meta.env.VITE_imageHostApiKey
+  //   }`;
+
+  //   axios.post(imageApiURL, formData).then((res) => {
+  //     const photoURL = res.data.data.url;
+
+  //         // send photoUrl in the database
+  //         const reportInfo = {
+  //           photoURL: photoURL,
+  //           name: data.name,
+  //           email: data.email,
+  //           issue: data.issue,
+  //           category: data.category,
+  //           location: data.location,
+  //           createdAt: data.createdAt,
+  //         };
+  //     Swal.fire({
+  //       title: "Confirm submission",
+  //       text: "Do you want to create this report?",
+  //       icon: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonText: "Yes, submit",
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         axiosSecure.post("/reports", reportInfo).then((res) => {
+  //           if (res.data.insertedId) {
+  //             navigate("/dashboard/my-reports");
+  //             Swal.fire({
+  //               icon: "success",
+  //               title: "Report submitted successfully",
+  //               timer: 2200,
+  //               showConfirmButton: false,
+  //             });
+  //           }
+  //         });
+  //       }
+  //     });
+  //   });
+  // };
+
+  const handleCreateReport = async (data) => {
+  try {
+    const imageFile = data.image[0];
+
     const formData = new FormData();
-    formData.append("image", profileImg);
 
-    const imageApiURL = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_imageHostApiKey
-    }`;
+    formData.append("file", imageFile);
 
-    axios.post(imageApiURL, formData).then((res) => {
-      const photoURL = res.data.data.url;
+    formData.append(
+      "upload_preset",
+      import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+    );
 
-          // send photoUrl in the database
-          const reportInfo = {
-            photoURL: photoURL,
-            name: data.name,
-            email: data.email,
-            issue: data.issue,
-            category: data.category,
-            location: data.location,
-            createdAt: data.createdAt,
-          };
-      Swal.fire({
-        title: "Confirm submission",
-        text: "Do you want to create this report?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes, submit",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axiosSecure.post("/reports", reportInfo).then((res) => {
-            if (res.data.insertedId) {
-              navigate("/dashboard/my-reports");
-              Swal.fire({
-                icon: "success",
-                title: "Report submitted successfully",
-                timer: 2200,
-                showConfirmButton: false,
-              });
-            }
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+
+    const cloudinaryURL = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+
+    // upload image to cloudinary
+    const res = await axios.post(cloudinaryURL, formData);
+
+    const photoURL = res.data.secure_url;
+
+    // database data
+    const reportInfo = {
+      photoURL,
+      name: data.name,
+      email: data.email,
+      issue: data.issue,
+      category: data.category,
+      location: data.location,
+      createdAt: new Date(),
+    };
+
+    Swal.fire({
+      title: "Confirm submission",
+      text: "Do you want to create this report?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, submit",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const dbRes = await axiosSecure.post("/reports", reportInfo);
+
+        if (dbRes.data.insertedId) {
+          navigate("/dashboard/my-reports");
+
+          Swal.fire({
+            icon: "success",
+            title: "Report submitted successfully",
+            timer: 2200,
+            showConfirmButton: false,
           });
         }
-      });
+      }
     });
-  };
+  } catch (error) {
+    console.log(error);
+
+    Swal.fire({
+      icon: "error",
+      title: "Image upload failed",
+    });
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-slate-50 py-10 px-4">
