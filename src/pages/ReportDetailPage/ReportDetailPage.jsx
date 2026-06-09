@@ -52,48 +52,57 @@ const ReportDetailPage = () => {
 
   return (
     <div>
-      <div className="h-screen flex flex-col px-4 md:px-6 py-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 flex-shrink-0">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
+        <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
           Report Details
         </h2>
 
-        <div className="flex flex-col md:flex-row gap-6 flex-1 min-h-0">
-          <div className="w-full md:w-2/5 bg-white shadow-md rounded-xl overflow-hidden flex-shrink-0">
+        <div className="flex flex-col gap-6">
+          
+          {/* image card */}
+          <div className="bg-white shadow-md rounded-xl overflow-hidden">
             <img
               src={
                 report.photoURL || "https://placehold.co/800x500?text=No+Image"
               }
               alt={report.issue}
-              className="w-full h-full object-cover"
+              className="w-full h-[300px] md:h-[450px] object-cover"
             />
           </div>
 
-          <div className="flex-1 bg-white shadow-md rounded-xl p-6 md:p-8 min-h-0 overflow-y-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* info card */}
+          <div className="bg-white shadow-md rounded-xl p-6 md:p-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <h5 className="font-semibold text-lg">Reporter Name</h5>
                 <p>{report.name}</p>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Reporter Email</h5>
                 <p>{report.email}</p>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Report Title</h5>
                 <p>{report.issue}</p>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Category</h5>
                 <p>{report.category}</p>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Location</h5>
                 <p>{report.location}</p>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Created At</h5>
                 <p>{new Date(report.createdAt).toLocaleString()}</p>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Payment Status</h5>
                 <span
@@ -106,6 +115,7 @@ const ReportDetailPage = () => {
                   {report.paymentStatus || "Pending"}
                 </span>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Priority</h5>
                 <span
@@ -118,6 +128,7 @@ const ReportDetailPage = () => {
                   {report.priority || "Normal"}
                 </span>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Report Status</h5>
                 <span
@@ -132,16 +143,19 @@ const ReportDetailPage = () => {
                   {report.reportStatus || "Pending"}
                 </span>
               </div>
+
               <div>
                 <h5 className="font-semibold text-lg">Tracking ID</h5>
                 <p>{report.trakingId || "N/A"}</p>
               </div>
+
               {report.staffName && (
                 <>
                   <div>
                     <h5 className="font-semibold text-lg">Assigned Staff</h5>
                     <p>{report.staffName}</p>
                   </div>
+
                   <div>
                     <h5 className="font-semibold text-lg">Staff Email</h5>
                     <p>{report.staffEmail}</p>
