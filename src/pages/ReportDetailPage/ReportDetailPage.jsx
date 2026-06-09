@@ -20,7 +20,6 @@ const ReportDetailPage = () => {
     },
   });
 
-  // ✅ Scroll to top whenever the report id changes
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id]);
@@ -47,33 +46,28 @@ const ReportDetailPage = () => {
 
   if (!report) {
     return (
-      <div className="text-center text-gray-500 mt-20">
-        Report not found.
-      </div>
+      <div className="text-center text-gray-500 mt-20">Report not found.</div>
     );
   }
 
   return (
     <div>
-
-      {/* ── Report Detail (1 viewport height) ── */}
       <div className="h-screen flex flex-col px-4 md:px-6 py-6">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-4 flex-shrink-0">
           Report Details
         </h2>
 
         <div className="flex flex-col md:flex-row gap-6 flex-1 min-h-0">
-
-          {/* LEFT: Image Card */}
           <div className="w-full md:w-2/5 bg-white shadow-md rounded-xl overflow-hidden flex-shrink-0">
             <img
-              src={report.photoURL || "https://placehold.co/800x500?text=No+Image"}
+              src={
+                report.photoURL || "https://placehold.co/800x500?text=No+Image"
+              }
               alt={report.issue}
               className="w-full h-full object-cover"
             />
           </div>
 
-          {/* RIGHT: Info Card — ✅ overflow-y-auto to scroll inside card */}
           <div className="flex-1 bg-white shadow-md rounded-xl p-6 md:p-8 min-h-0 overflow-y-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
@@ -104,7 +98,9 @@ const ReportDetailPage = () => {
                 <h5 className="font-semibold text-lg">Payment Status</h5>
                 <span
                   className={`badge ${
-                    report.paymentStatus === "paid" ? "badge-success" : "badge-warning"
+                    report.paymentStatus === "paid"
+                      ? "badge-success"
+                      : "badge-warning"
                   }`}
                 >
                   {report.paymentStatus || "Pending"}
@@ -114,7 +110,9 @@ const ReportDetailPage = () => {
                 <h5 className="font-semibold text-lg">Priority</h5>
                 <span
                   className={`badge ${
-                    report.priority === "High-Priority" ? "badge-error" : "badge-info"
+                    report.priority === "High-Priority"
+                      ? "badge-error"
+                      : "badge-info"
                   }`}
                 >
                   {report.priority || "Normal"}
@@ -127,8 +125,8 @@ const ReportDetailPage = () => {
                     report.reportStatus === "Solved"
                       ? "badge-success"
                       : report.reportStatus === "In-Progress"
-                      ? "badge-info"
-                      : "badge-warning"
+                        ? "badge-info"
+                        : "badge-warning"
                   }`}
                 >
                   {report.reportStatus || "Pending"}
@@ -152,15 +150,15 @@ const ReportDetailPage = () => {
               )}
             </div>
           </div>
-
         </div>
       </div>
 
       {/* ── Recent Reports ── */}
       <div className="max-w-7xl mx-auto px-4 py-10">
-
         <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-base-content">Recent Reports</h2>
+          <h2 className="text-3xl font-bold text-base-content">
+            Recent Reports
+          </h2>
           <p className="text-gray-500 mt-2">
             This section shows the most recent issues you have reported, helping
             you quickly track their status, priority, and progress in one place.
@@ -233,7 +231,6 @@ const ReportDetailPage = () => {
           ))}
         </div>
       </div>
-
     </div>
   );
 };

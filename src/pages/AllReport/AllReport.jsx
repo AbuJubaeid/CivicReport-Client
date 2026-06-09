@@ -18,9 +18,40 @@ const AllReport = () => {
   const [upVotes, setUpVotes] = useState({});
   const [votedReports, setVotedReports] = useState({});
 
-  
   const [currentPage, setCurrentPage] = useState(1);
   const reportsPerPage = 9;
+
+  const ReportSkeleton = () => {
+    return (
+      <div className="card bg-base-100 border shadow animate-pulse">
+        <div className="h-48 bg-base-300 rounded-t-xl"></div>
+
+        <div className="card-body">
+          <div className="flex justify-between">
+            <div className="h-5 w-40 bg-base-300 rounded"></div>
+            <div className="h-6 w-20 bg-base-300 rounded"></div>
+          </div>
+
+          <div className="flex gap-2 mt-3">
+            <div className="h-6 w-24 bg-base-300 rounded"></div>
+            <div className="h-6 w-20 bg-base-300 rounded"></div>
+          </div>
+
+          <div className="divider"></div>
+
+          <div className="flex justify-between">
+            <div className="h-4 w-24 bg-base-300 rounded"></div>
+            <div className="h-4 w-20 bg-base-300 rounded"></div>
+          </div>
+
+          <div className="flex justify-between items-center mt-4">
+            <div className="h-4 w-10 bg-base-300 rounded"></div>
+            <div className="h-10 w-28 bg-base-300 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   const {
     data: reports = [],
@@ -70,13 +101,30 @@ const AllReport = () => {
 
   if (loading || isLoading) {
     return (
-      <div className="flex justify-center py-20">
-        <span className="loading loading-spinner loading-lg"></span>
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <h2 className="text-3xl font-bold text-center mb-6">All Reports</h2>
+
+        {/* Filter Skeleton */}
+        <div className="bg-base-100 p-4 rounded-lg shadow mb-8 flex flex-col lg:flex-row gap-4 justify-between animate-pulse">
+          <div className="flex flex-wrap gap-3">
+            <div className="h-12 w-44 bg-base-300 rounded"></div>
+            <div className="h-12 w-44 bg-base-300 rounded"></div>
+            <div className="h-12 w-44 bg-base-300 rounded"></div>
+          </div>
+
+          <div className="h-12 w-full lg:w-72 bg-base-300 rounded"></div>
+        </div>
+
+        {/* Cards Skeleton */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(9)].map((_, index) => (
+            <ReportSkeleton key={index} />
+          ))}
+        </div>
       </div>
     );
   }
 
-  
   const indexOfLastReport = currentPage * reportsPerPage;
   const indexOfFirstReport = indexOfLastReport - reportsPerPage;
   const currentReports = reports.slice(indexOfFirstReport, indexOfLastReport);
@@ -137,6 +185,7 @@ const AllReport = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentReports.map((report) => {
           const isOwner = report.email === user?.email;
+
           const voteCount =
             upVotes[report._id] !== undefined
               ? upVotes[report._id]
@@ -160,11 +209,18 @@ const AllReport = () => {
                   <h3 className="font-semibold text-lg line-clamp-2">
                     {report.issue}
                   </h3>
+
                   <span
                     className={`badge capitalize
-                      ${report.reportStatus === "pending" && "badge-warning"}
-                      ${report.reportStatus === "In-Progress" && "badge-info"}
-                      ${report.reportStatus === "Solved" && "badge-success"}
+                      ${
+                        report.reportStatus === "pending" ? "badge-warning" : ""
+                      }
+                      ${
+                        report.reportStatus === "In-Progress"
+                          ? "badge-info"
+                          : ""
+                      }
+                      ${report.reportStatus === "Solved" ? "badge-success" : ""}
                     `}
                   >
                     {report.reportStatus}
@@ -173,8 +229,11 @@ const AllReport = () => {
 
                 <div className="flex flex-wrap gap-2 mt-2">
                   <span className="badge badge-outline">{report.category}</span>
+
                   {report.priority && (
-                    <span className="badge badge-outline">{report.priority}</span>
+                    <span className="badge badge-outline">
+                      {report.priority}
+                    </span>
                   )}
                 </div>
 
@@ -182,6 +241,7 @@ const AllReport = () => {
 
                 <div className="text-sm text-gray-500 flex justify-between">
                   <span>{report.name}</span>
+
                   <span>{new Date(report.createdAt).toLocaleDateString()}</span>
                 </div>
 
@@ -189,8 +249,10 @@ const AllReport = () => {
                   <button
                     onClick={() => handleUpVote(report)}
                     disabled={isOwner}
-                    className={`flex items-center cursor-pointer gap-1 text-sm ${
-                      isOwner ? "opacity-40 cursor-not-allowed" : ""
+                    className={`flex items-center gap-1 text-sm ${
+                      isOwner
+                        ? "opacity-40 cursor-not-allowed"
+                        : "cursor-pointer"
                     }`}
                   >
                     <FaArrowUp />
@@ -210,7 +272,6 @@ const AllReport = () => {
         })}
       </div>
 
-      
       {totalPages > 1 && (
         <div className="flex justify-center gap-2 mt-8">
           <button
@@ -235,9 +296,7 @@ const AllReport = () => {
 
           <button
             className="btn btn-sm"
-            onClick={() =>
-              setCurrentPage((p) => Math.min(p + 1, totalPages))
-            }
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
           >
             Next
@@ -249,4 +308,3 @@ const AllReport = () => {
 };
 
 export default AllReport;
-
