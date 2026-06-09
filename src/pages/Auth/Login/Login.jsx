@@ -42,11 +42,9 @@
 //   return (
 //     <div className="min-h-screen my-6 flex flex-col lg:flex-row">
 
-      
 //       <div className="lg:w-1/2 flex items-center justify-center px-6 lg:px-24">
 //         <div className="w-full max-w-md">
 
-          
 //           <h2 className="text-3xl font-semibold text-center text-slate-800 mb-2">
 //             Welcome back
 //           </h2>
@@ -95,7 +93,6 @@
 //                 transition"
 //               />
 
-              
 //               <div
 //                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-slate-500"
 //                 onClick={() => setShowPassword(!showPassword)}
@@ -135,7 +132,6 @@
 //               </button>
 //             </div>
 
-            
 //             <button
 //               type="submit"
 //               className="w-full py-3.5 rounded-lg
@@ -147,17 +143,14 @@
 //             </button>
 //           </form>
 
-          
 //           <div className="flex items-center gap-4 my-8">
 //             <span className="flex-1 h-px bg-slate-200" />
 //             <span className="text-sm text-slate-500">or</span>
 //             <span className="flex-1 h-px bg-slate-200" />
 //           </div>
 
-          
 //           <SocialLogin />
 
-          
 //           <p className="mt-8 text-sm text-center text-slate-600">
 //             Don’t have an account?
 //             <Link
@@ -171,7 +164,6 @@
 //         </div>
 //       </div>
 
-      
 //       <div className="lg:w-1/2 hidden lg:flex items-center justify-start pl-16">
 //         <img
 //           src="https://i.ibb.co.com/VR3fhBB/login.png"
@@ -238,16 +230,16 @@ const Login = () => {
 
   const handleDemoSelect = (role) => {
     setValue("email", DEMO_CREDENTIALS[role].email, { shouldValidate: true });
-    setValue("password", DEMO_CREDENTIALS[role].password, { shouldValidate: true });
+    setValue("password", DEMO_CREDENTIALS[role].password, {
+      shouldValidate: true,
+    });
     setDemoOpen(false);
   };
 
   return (
     <div className="min-h-screen my-6 flex flex-col lg:flex-row">
-
       <div className="lg:w-1/2 flex items-center justify-center px-6 lg:px-24">
         <div className="w-full max-w-md">
-
           <h2 className="text-3xl font-semibold text-center text-slate-800 mb-2">
             Welcome back
           </h2>
@@ -272,7 +264,12 @@ const Login = () => {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
@@ -296,11 +293,7 @@ const Login = () => {
           </div>
 
           {/* FORM */}
-          <form
-            onSubmit={handleSubmit(handleSignin)}
-            className="space-y-7"
-          >
-
+          <form onSubmit={handleSubmit(handleSignin)} className="space-y-7">
             {/* Email */}
             <div className="relative">
               <input
@@ -313,9 +306,7 @@ const Login = () => {
                 transition"
               />
               {errors.email && (
-                <p className="text-red-500 text-xs mt-1">
-                  Email is required
-                </p>
+                <p className="text-red-500 text-xs mt-1">Email is required</p>
               )}
             </div>
 
@@ -403,7 +394,6 @@ const Login = () => {
               Register
             </Link>
           </p>
-
         </div>
       </div>
 
@@ -414,32 +404,8 @@ const Login = () => {
           className="w-full max-w-xl object-contain"
         />
       </div>
-
     </div>
   );
 };
 
 export default Login;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

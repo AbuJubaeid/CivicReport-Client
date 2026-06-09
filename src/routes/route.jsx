@@ -75,12 +75,18 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // {
+      //   path: "report-detail/:id",
+      //   element: (
+      //     <PrivateRoute>
+      //       <ReportDetailPage></ReportDetailPage>
+      //     </PrivateRoute>
+      //   ),
+      // },
       {
         path: "report-detail/:id",
         element: (
-          <PrivateRoute>
             <ReportDetailPage></ReportDetailPage>
-          </PrivateRoute>
         ),
       },
       {
