@@ -3,6 +3,7 @@ import FAQ from "../FAQ";
 import HowItWorks from "../HowItWorks";
 import KeyFeatures from "../KeyFeatures";
 import LatestResolvedReports from "../LatestResolvedReports";
+import Newsletter from "../Newsletter";
 import OurMission from "../OurMission";
 import RecentReports from "../RecentReports";
 import WCAS from "../WCAS";
@@ -36,6 +37,9 @@ const Home = () => {
       </div>
       <div>
         <FAQ></FAQ>
+      </div>
+      <div>
+        <Newsletter></Newsletter>
       </div>
     </div>
   );
