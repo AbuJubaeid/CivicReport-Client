@@ -64,10 +64,10 @@ const ApproveStaffs = () => {
   return (
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-slate-800">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-base-content">
           Staff Approval Requests
         </h2>
-        <p className="text-slate-500 mt-1 text-sm sm:text-base">
+        <p className="text-base-content/60 mt-1 text-sm sm:text-base">
           Pending staff requests:{" "}
           <span className="font-medium">{staffs.length}</span>
         </p>
@@ -75,8 +75,8 @@ const ApproveStaffs = () => {
 
       <div className="overflow-x-auto border border-slate-200 rounded-xl">
         <table className="min-w-full text-sm text-left">
-          <thead className="bg-slate-100 text-slate-600 uppercase text-xs tracking-wider">
-            <tr>
+          <thead className="bg-slate-100 text-base-content/70 uppercase text-xs tracking-wider">
+            <tr className="bg-base-100">
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">Name</th>
               <th className="px-4 py-3">Email</th>
@@ -120,7 +120,7 @@ const ApproveStaffs = () => {
                       </button>
                       <span
                         className="absolute -top-8 left-1/2 -translate-x-1/2 
-                        whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white 
+                        whitespace-nowrap rounded bg-base-content/90px-2 py-1 text-xs text-base-100 
                         opacity-0 group-hover:opacity-100 transition pointer-events-none"
                       >
                         Approve
@@ -136,7 +136,7 @@ const ApproveStaffs = () => {
                       </button>
                       <span
                         className="absolute -top-8 left-1/2 -translate-x-1/2 
-                        whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white 
+                        whitespace-nowrap rounded bg-base-content/90px-2 py-1 text-xs text-base-100 
                         opacity-0 group-hover:opacity-100 transition pointer-events-none"
                       >
                         Reject
@@ -152,7 +152,7 @@ const ApproveStaffs = () => {
                       </button>
                       <span
                         className="absolute -top-8 left-1/2 -translate-x-1/2 
-                        whitespace-nowrap rounded bg-slate-800 px-2 py-1 text-xs text-white 
+                        whitespace-nowrap rounded bg-base-content/90px-2 py-1 text-xs text-base-100 
                         opacity-0 group-hover:opacity-100 transition pointer-events-none"
                       >
                         Delete

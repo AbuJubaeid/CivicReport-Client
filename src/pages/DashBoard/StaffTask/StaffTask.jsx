@@ -37,12 +37,12 @@ const StaffTask = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-center mb-6 text-slate-800">
+      <h2 className="text-3xl font-bold text-center mb-6 text-base-content">
         Reports: {reports.length}
       </h2>
 
       <div className="overflow-x-auto">
-        <table className="table-auto w-full bg-white shadow-lg rounded-lg overflow-hidden">
+        <table className="table-auto w-full bg-base-100shadow-lg rounded-lg overflow-hidden">
           <thead className="bg-slate-200 text-slate-800">
             <tr>
               <th className="py-3 px-4">#</th>
@@ -59,7 +59,7 @@ const StaffTask = () => {
                 <td className="py-2 px-3 text-center">{index + 1}</td>
                 <td className="py-2 px-3 font-medium text-slate-700">{report.issue}</td>
                 <td className="py-2 px-3 text-slate-600">{report.location}</td>
-                <td className="py-2 px-3 text-slate-500">
+                <td className="py-2 px-3 text-base-content/60">
                   {new Date(report.createdAt).toLocaleDateString()}
                 </td>
                 

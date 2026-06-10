@@ -54,7 +54,7 @@ const CompletedReport = () => {
                   <td>{report.location}</td>
                   <td>
                     <span
-                      className={`badge text-white ${
+                      className={`badge text-base-100 ${
                         report.reportStatus === "Solved"
                           ? "bg-green-500"
                           : report.reportStatus === "In-Progress"

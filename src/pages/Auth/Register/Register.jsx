@@ -174,8 +174,8 @@ const Register = () => {
           </div>
 
           <button className="w-full py-3.5 rounded-lg
-              bg-slate-900 text-white font-medium
-              hover:bg-slate-800 active:scale-[0.98]
+              bg-base-contenttext-base-100 font-medium
+              hover:bg-base-content/90active:scale-[0.98]
               transition">
             Register
           </button>
@@ -435,8 +435,8 @@ export default Register;
 
 //           <button
 //             className="w-full py-3.5 rounded-lg
-//               bg-slate-900 text-white font-medium
-//               hover:bg-slate-800 active:scale-[0.98]
+//               bg-base-contenttext-base-100 font-medium
+//               hover:bg-base-content/90active:scale-[0.98]
 //               transition"
 //           >
 //             Register

@@ -61,18 +61,18 @@ const AssignStaff = () => {
   return (
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="mb-6">
-        <h2 className="text-2xl sm:text-3xl font-semibold text-slate-800">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-base-content">
           Assign Staff
         </h2>
-        <p className="text-slate-500 mt-1 text-sm sm:text-base">
+        <p className="text-base-content/60 mt-1 text-sm sm:text-base">
           Pending Reports: <span className="font-medium">{reports.length}</span>
         </p>
       </div>
 
       <div className="hidden md:block overflow-x-auto border border-slate-200 rounded-xl">
         <table className="min-w-full text-sm text-left">
-          <thead className="bg-slate-100 text-slate-600 uppercase text-xs tracking-wider">
-            <tr>
+          <thead className="bg-slate-100 text-base-content/70 uppercase text-xs tracking-wider">
+            <tr className="bg-base-100">
               <th className="px-4 py-3">#</th>
               <th className="px-4 py-3">Issue</th>
               <th className="px-4 py-3">Location</th>
@@ -96,7 +96,7 @@ const AssignStaff = () => {
                 <td className="px-4 py-3 text-center">
                   <button
                     onClick={() => openStaffModal(report)}
-                    className="px-4 py-2 text-sm rounded-md bg-slate-800 text-white hover:bg-slate-700 transition"
+                    className="px-4 py-2 text-sm rounded-md bg-base-content/90text-base-100 hover:bg-slate-700 transition"
                   >
                     Assign Staff
                   </button>
@@ -113,14 +113,14 @@ const AssignStaff = () => {
         className="modal modal-bottom sm:modal-middle"
       >
         <div className="modal-box max-w-2xl rounded-xl">
-          <h3 className="text-lg font-semibold text-slate-800 mb-4">
+          <h3 className="text-lg font-semibold text-base-content mb-4">
             Available Staff ({staffs.length})
           </h3>
 
           <div className="overflow-x-auto border border-slate-200 rounded-lg">
             <table className="min-w-full text-sm text-left">
-              <thead className="bg-slate-100 text-slate-600 uppercase text-xs">
-                <tr>
+              <thead className="bg-slate-100 text-base-content/70uppercase text-xs">
+                <tr className="bg-base-100">
                   <th className="px-4 py-3">#</th>
                   <th className="px-4 py-3">Name</th>
                   <th className="px-4 py-3">Email</th>
@@ -138,7 +138,7 @@ const AssignStaff = () => {
                     <td className="px-4 py-3 text-center">
                       <button
                         onClick={() => handleAssignStaff(staff)}
-                        className="px-3 py-1.5 text-xs rounded-md bg-slate-800 text-white hover:bg-slate-700 transition"
+                        className="px-3 py-1.5 text-xs rounded-md bg-base-content/90text-base-100 hover:bg-slate-700 transition"
                       >
                         Assign
                       </button>
@@ -151,7 +151,7 @@ const AssignStaff = () => {
 
           <div className="mt-5 text-right">
             <form method="dialog">
-              <button className="px-4 py-2 text-sm rounded-md border border-slate-300 hover:bg-slate-100 transition">
+              <button className="px-4 py-2 text-sm rounded-md border border-slate-300 hover:bg-base-200 transition">
                 Close
               </button>
             </form>

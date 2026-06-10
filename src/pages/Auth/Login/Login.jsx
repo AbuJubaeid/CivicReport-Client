@@ -45,10 +45,10 @@
 //       <div className="lg:w-1/2 flex items-center justify-center px-6 lg:px-24">
 //         <div className="w-full max-w-md">
 
-//           <h2 className="text-3xl font-semibold text-center text-slate-800 mb-2">
+//           <h2 className="text-3xl font-semibold text-center text-base-contentmb-2">
 //             Welcome back
 //           </h2>
-//           <p className="text-slate-500 text-center mb-10 text-base">
+//           <p className="text-base-content/60 text-center mb-10 text-base">
 //             Sign in to continue managing civic reports transparently.
 //           </p>
 
@@ -66,7 +66,7 @@
 //                 placeholder="Email address"
 //                 className="w-full border border-slate-300 rounded-lg
 //                 py-3.5 px-4 text-slate-800
-//                 focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300
+//                 focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20
 //                 transition"
 //               />
 //               {errors.email && (
@@ -89,12 +89,12 @@
 //                 placeholder="Password"
 //                 className="w-full border border-slate-300 rounded-lg
 //                 py-3.5 px-4 pr-12 text-slate-800
-//                 focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300
+//                 focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20
 //                 transition"
 //               />
 
 //               <div
-//                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-slate-500"
+//                 className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-base-content/60"
 //                 onClick={() => setShowPassword(!showPassword)}
 //               >
 //                 {showPassword ? (
@@ -126,7 +126,7 @@
 //               <button
 //                 type="button"
 //                 onClick={handleForgetPassword}
-//                 className="text-sm text-slate-600 hover:text-slate-900 transition"
+//                 className="text-sm text-base-content/70hover:text-base-content transition"
 //               >
 //                 Forgot password?
 //               </button>
@@ -135,8 +135,8 @@
 //             <button
 //               type="submit"
 //               className="w-full py-3.5 rounded-lg
-//               bg-slate-900 text-white font-medium
-//               hover:bg-slate-800 active:scale-[0.98]
+//               bg-base-contenttext-base-100 font-medium
+//               hover:bg-base-content/90active:scale-[0.98]
 //               transition"
 //             >
 //               Sign in
@@ -145,7 +145,7 @@
 
 //           <div className="flex items-center gap-4 my-8">
 //             <span className="flex-1 h-px bg-slate-200" />
-//             <span className="text-sm text-slate-500">or</span>
+//             <span className="text-sm text-base-content/60">or</span>
 //             <span className="flex-1 h-px bg-slate-200" />
 //           </div>
 
@@ -240,10 +240,10 @@ const Login = () => {
     <div className="min-h-screen my-6 flex flex-col lg:flex-row">
       <div className="lg:w-1/2 flex items-center justify-center px-6 lg:px-24">
         <div className="w-full max-w-md">
-          <h2 className="text-3xl font-semibold text-center text-slate-800 mb-2">
+          <h2 className="text-3xl font-semibold text-center text-base-contentmb-2">
             Welcome back
           </h2>
-          <p className="text-slate-500 text-center mb-10 text-base">
+          <p className="text-base-content/60 text-center mb-10 text-base">
             Sign in to continue managing civic reports transparently.
           </p>
 
@@ -253,8 +253,8 @@ const Login = () => {
               type="button"
               onClick={() => setDemoOpen((prev) => !prev)}
               className="w-full py-3.5 rounded-lg
-              bg-slate-900 text-white font-medium
-              hover:bg-slate-800 active:scale-[0.98]
+              bg-base-content text-base-100 font-medium
+              hover:bg-base-content/90 active:scale-[0.98]
               transition flex items-center justify-center gap-2"
             >
               Demo Login
@@ -274,13 +274,13 @@ const Login = () => {
             </button>
 
             {demoOpen && (
-              <div className="absolute z-10 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden">
+              <div className="absolute z-10 mt-1 w-full bg-base-100 border border-slate-200 rounded-lg shadow-lg overflow-hidden">
                 {["admin", "staff", "user"].map((role) => (
                   <button
                     key={role}
                     type="button"
                     onClick={() => handleDemoSelect(role)}
-                    className="w-full text-left px-4 py-3 text-slate-700 hover:bg-slate-100 transition capitalize text-sm font-medium"
+                    className="w-full text-left px-4 py-3 text-base-content hover:bg-base-200 transition capitalize text-sm font-medium"
                   >
                     {role.charAt(0).toUpperCase() + role.slice(1)}
                     <span className="ml-2 text-slate-400 font-normal text-xs">
@@ -301,8 +301,8 @@ const Login = () => {
                 {...register("email", { required: true })}
                 placeholder="Email address"
                 className="w-full border border-slate-300 rounded-lg
-                py-3.5 px-4 text-slate-800
-                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300
+                py-3.5 px-4 
+                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20
                 transition"
               />
               {errors.email && (
@@ -322,13 +322,13 @@ const Login = () => {
                 })}
                 placeholder="Password"
                 className="w-full border border-slate-300 rounded-lg
-                py-3.5 px-4 pr-12 text-slate-800
-                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300
+                py-3.5 px-4 pr-12
+                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20
                 transition"
               />
 
               <div
-                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-slate-500"
+                className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-base-content/60"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -360,7 +360,7 @@ const Login = () => {
               <button
                 type="button"
                 onClick={handleForgetPassword}
-                className="text-sm text-slate-600 hover:text-slate-900 transition"
+                className="text-sm text-base-content/70 hover:text-base-content transition"
               >
                 Forgot password?
               </button>
@@ -369,8 +369,8 @@ const Login = () => {
             <button
               type="submit"
               className="w-full py-3.5 rounded-lg
-              bg-slate-900 text-white font-medium
-              hover:bg-slate-800 active:scale-[0.98]
+              bg-base-content text-base-100 font-medium
+              hover:bg-base-content/90 active:scale-[0.98]
               transition"
             >
               Sign in
@@ -379,7 +379,7 @@ const Login = () => {
 
           <div className="flex items-center gap-4 my-8">
             <span className="flex-1 h-px bg-slate-200" />
-            <span className="text-sm text-slate-500">or</span>
+            <span className="text-sm text-base-content/60">or</span>
             <span className="flex-1 h-px bg-slate-200" />
           </div>
 
@@ -389,7 +389,7 @@ const Login = () => {
             Don't have an account?
             <Link
               to="/register"
-              className="ml-1 font-medium text-slate-900 hover:underline"
+              className="ml-1 font-medium text-slate-600 hover:underline"
             >
               Register
             </Link>

@@ -106,7 +106,7 @@ const UserManager = () => {
       <div className="overflow-x-auto">
         <table className="min-w-full border border-gray-200 divide-y divide-gray-200">
           <thead className="bg-gray-50">
-            <tr>
+            <tr className="bg-base-100">
               <th className="px-4 py-2 text-left text-gray-600 font-medium">#</th>
               <th className="px-4 py-2 text-left text-gray-600 font-medium">User</th>
               <th className="px-4 py-2 text-left text-gray-600 font-medium">Email</th>
@@ -114,7 +114,7 @@ const UserManager = () => {
               <th className="px-4 py-2 text-left text-gray-600 font-medium">Admin Action</th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-100">
+          <tbody className="bg-base-100divide-y divide-gray-100">
             {users.map((user, index) => (
               <tr key={user._id} className="hover:bg-gray-50">
                 <td className="px-4 py-3">{index + 1}</td>
@@ -126,18 +126,18 @@ const UserManager = () => {
                       </div>
                     </div>
                     <div>
-                      <div className="font-medium text-gray-800">{user.displayName}</div>
+                      <div className="font-medium text-slate-600">{user.displayName}</div>
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3">{user.email}</td>
-                <td className="px-4 py-3 capitalize">{user.role}</td>
-                <td className="px-4 py-3 flex gap-2">
+                <td className="px-4 py-3 text-slate-600">{user.email}</td>
+                <td className="px-4 py-3 text-slate-600 capitalize">{user.role}</td>
+                <td className="px-4 py-3 text-slate-600 flex gap-2">
                   {user.role === "admin" ? (
                     <button
                       onClick={() => handleRemoveAdmin(user)}
                       title="Remove Admin"
-                      className="btn btn-sm bg-red-500 hover:bg-red-600 text-white"
+                      className="btn btn-sm bg-red-500 hover:bg-red-600 text-base-100"
                     >
                       <GiShieldDisabled />
                     </button>
@@ -145,7 +145,7 @@ const UserManager = () => {
                     <button
                       onClick={() => handleMakeAdmin(user)}
                       title="Make Admin"
-                      className="btn btn-sm bg-cyan-500 hover:bg-cyan-600 text-white"
+                      className="btn btn-sm bg-cyan-500 hover:bg-cyan-600 text-base-100"
                     >
                       <FaUserShield />
                     </button>

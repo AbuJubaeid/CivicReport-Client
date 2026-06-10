@@ -118,8 +118,8 @@ const UserProfile = () => {
         className={`shadow-xl rounded-xl p-6 flex flex-col md:flex-row gap-6 items-center
         ${
           isHighPriority
-            ? "bg-green-50 border-2 border-green-400"
-            : "bg-white"
+            ? "bg-base-100 border-2 border-green-400"
+            : "bg-base-100"
         }`}
       >
         <img
@@ -169,7 +169,7 @@ const UserProfile = () => {
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <form
             onSubmit={handleUpdateSubmit}
-            className="bg-white p-6 rounded-xl w-full max-w-md space-y-4"
+            className="bg-base-100p-6 rounded-xl w-full max-w-md space-y-4"
           >
             <h2 className="text-xl font-bold text-center">Edit Profile</h2>
 
@@ -453,7 +453,7 @@ export default UserProfile;
 //         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
 //           <form
 //             onSubmit={handleUpdateSubmit}
-//             className="bg-white p-6 rounded-xl w-full max-w-md space-y-4"
+//             className="bg-base-100p-6 rounded-xl w-full max-w-md space-y-4"
 //           >
 //             <h2 className="text-xl font-bold text-center">
 //               Edit Profile

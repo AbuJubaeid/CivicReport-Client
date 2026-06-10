@@ -130,21 +130,21 @@ const CreateIssue = () => {
 
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10 px-4">
+    <div className="min-h-screen py-10 px-4">
       <div className="max-w-4xl mx-auto">
 
         
-        <div className="mb-10 text-center">
-          <h2 className="text-3xl font-semibold text-slate-800">
+        <div className="mb-10 text-center ">
+          <h2 className="text-3xl font-semibold text-base-content">
             Report a Civic Issue
           </h2>
-          <p className="mt-2 text-slate-600 max-w-xl mx-auto">
+          <p className="mt-2 text-base-content/70 max-w-xl mx-auto">
             Submit details about a public issue to help authorities take action.
           </p>
         </div>
 
         
-        <div className="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10">
+        <div className="bg-base-100 border border-slate-200 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10">
 
           <form
             onSubmit={handleSubmit(handleCreateReport)}
@@ -153,7 +153,7 @@ const CreateIssue = () => {
 
             
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-base-content mb-1">
                 Name
               </label>
               <input
@@ -161,7 +161,7 @@ const CreateIssue = () => {
                 defaultValue={user?.displayName}
                 {...register("name", { required: true })}
                 className="w-full rounded-lg border border-slate-300 px-4 py-3
-                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300"
+                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20"
                 placeholder="Your name"
               />
               {errors.name && (
@@ -171,7 +171,7 @@ const CreateIssue = () => {
 
             
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-base-contentmb-1">
                 Email
               </label>
               <input
@@ -179,7 +179,7 @@ const CreateIssue = () => {
                 defaultValue={user?.email}
                 {...register("email", { required: true })}
                 className="w-full rounded-lg border border-slate-300 px-4 py-3
-                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300"
+                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20"
                 placeholder="Your email"
               />
               {errors.email && (
@@ -189,7 +189,7 @@ const CreateIssue = () => {
 
             
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-base-contentmb-1">
                 Issue Image
               </label>
               <input
@@ -206,14 +206,14 @@ const CreateIssue = () => {
 
             
             <div className="md:col-span-2">
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-base-contentmb-1">
                 Issue Title
               </label>
               <input
                 type="text"
                 {...register("issue", { required: true })}
                 className="w-full rounded-lg border border-slate-300 px-4 py-3
-                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300"
+                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20"
                 placeholder="Briefly describe the issue"
               />
               {errors.issue && (
@@ -223,13 +223,13 @@ const CreateIssue = () => {
 
            
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-base-contentmb-1">
                 Category
               </label>
               <select
                 {...register("category", { required: true })}
                 className="w-full rounded-lg border border-slate-300 px-4 py-3
-                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300"
+                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20"
                 defaultValue=""
               >
                 <option value="" disabled>
@@ -244,14 +244,14 @@ const CreateIssue = () => {
 
             
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">
+              <label className="block text-sm font-medium text-base-contentmb-1">
                 Location
               </label>
               <input
                 type="text"
                 {...register("location", { required: true })}
                 className="w-full rounded-lg border border-slate-300 px-4 py-3
-                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-slate-300"
+                focus:outline-none focus:border-slate-700 focus:ring-1 focus:ring-base-content/20"
                 placeholder="Issue location"
               />
               {errors.location && (
@@ -265,8 +265,8 @@ const CreateIssue = () => {
             <div className="md:col-span-2 flex justify-end mt-4">
               <button
                 type="submit"
-                className="px-8 py-3 rounded-lg bg-slate-800 text-white
-                hover:bg-slate-900 transition font-medium"
+                className="px-8 py-3 rounded-lg bg-base-content/90 text-base-100
+                hover:bg-base-content transition font-medium"
               >
                 Submit Report
               </button>

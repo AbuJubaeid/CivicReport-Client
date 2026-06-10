@@ -1,3 +1,235 @@
+// import { Link, NavLink } from "react-router";
+// import useHook from "../../../hooks/useHook";
+// import useRole from "../../../hooks/useRole";
+
+// const Navbar = () => {
+//   const { user, signOutFunc } = useHook();
+//   const { role } = useRole();
+
+//   const handleSignOut = () => {
+//     signOutFunc()
+//       .then(() => {
+//         console.log("Signed out");
+//       })
+//       .catch((error) => console.log(error));
+//   };
+
+//   const links = (
+//     <>
+//       <li>
+//         <NavLink
+//           className={({ isActive }) =>
+//             isActive ? "active-link" : "inactive-link"
+//           }
+//           to="/"
+//         >
+//           Home
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           className={({ isActive }) =>
+//             isActive ? "active-link" : "inactive-link"
+//           }
+//           to="/about-us"
+//         >
+//           About Us
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           className={({ isActive }) =>
+//             isActive ? "active-link" : "inactive-link"
+//           }
+//           to="/all-report"
+//         >
+//           All Reports
+//         </NavLink>
+//       </li>
+//       <li>
+//         <NavLink
+//           className={({ isActive }) =>
+//             isActive ? "active-link" : "inactive-link"
+//           }
+//           to="/impact"
+//         >
+//           Impact
+//         </NavLink>
+//       </li>
+
+//       {role === "user" && (
+//         <>
+//         <li>
+//           <NavLink
+//             className={({ isActive }) =>
+//               isActive ? "active-link" : "inactive-link"
+//             }
+//             to="/create-issue"
+//           >
+//             Create Report
+//           </NavLink>
+//         </li>
+//         <li>
+//           <NavLink
+//             className={({ isActive }) =>
+//               isActive ? "active-link" : "inactive-link"
+//             }
+//             to="/staff"
+//           >
+//             Be a staff
+//           </NavLink>
+//         </li>
+//         </>
+        
+//       )}
+//     </>
+//   );
+
+//   return (
+//     <div className="navbar bg-base-100 shadow-sm px-4 md:px-6">
+//       {/* Navbar Start */}
+//       <div className="navbar-start">
+//         <div className="dropdown">
+//           <label tabIndex={0} className="btn btn-ghost lg:hidden">
+//             <svg
+//               xmlns="http://www.w3.org/2000/svg"
+//               className="h-5 w-5"
+//               fill="none"
+//               viewBox="0 0 24 24"
+//               stroke="currentColor"
+//             >
+//               <path
+//                 strokeLinecap="round"
+//                 strokeLinejoin="round"
+//                 strokeWidth="2"
+//                 d="M4 6h16M4 12h8m-8 6h16"
+//               />
+//             </svg>
+//           </label>
+//           <ul
+//             tabIndex={0}
+//             className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+//           >
+//             {links}
+//           </ul>
+//         </div>
+//         <Link
+//           to="/"
+//           className="text-2xl font-bold flex items-center gap-2 ml-2 md:ml-0"
+//         >
+//           <img
+//             className="w-8 h-8"
+//             // src="../../../assets/image/logo.png"
+//             src="https://i.ibb.co.com/s9yzFJsz/logo.png"
+//             alt="logo"
+//           />
+//           CivicReport
+//         </Link>
+//       </div>
+
+//       {/* Navbar Center */}
+//       <div className="navbar-center ml-20  hidden lg:flex">
+//         <ul className="menu menu-horizontal px-1">{links}</ul>
+//       </div>
+
+//       {/* Navbar End */}
+//       <div className="navbar-end">
+//         {user ? (
+//           <div className="dropdown dropdown-end">
+//             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+//               <div className="w-10 rounded-full border-2 border-blue-500">
+//                 <img
+//                   src={user.photoURL || "/src/assets/image/default-avatar.png"}
+//                   alt="Profile"
+//                 />
+//               </div>
+//             </label>
+//             <ul
+//               tabIndex={0}
+//               className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2"
+//             >
+//               <li className="font-semibold text-blue-600">
+//                 {user.displayName}
+//               </li>
+
+//               {/* user Dashboard */}
+
+//               {role === "user" && (
+//                 <li>
+//                   <NavLink
+//                     className={({ isActive }) =>
+//                       `${
+//                         isActive ? "active-link" : "inactive-link"
+//                       } is-drawer-close tooltip tooltip-right`
+//                     }
+//                     to="/dashboard/user-dashboard"
+//                   >
+//                     <span className="is-drawer-close:hidden">
+//                       Dashboard
+//                     </span>
+//                   </NavLink>
+//                 </li>
+//               )}
+
+//               {/* staff Dashboard */}
+//               {role === "staff" && (
+//                 <li>
+//                   <NavLink
+//                     className={({ isActive }) =>
+//                       `${
+//                         isActive ? "active-link" : "inactive-link"
+//                       } is-drawer-close tooltip tooltip-right`
+//                     }
+//                     to="/dashboard/staff-dashboard"
+//                   >
+//                     <span className="is-drawer-close:hidden">
+//                       Dashboard
+//                     </span>
+//                   </NavLink>
+//                 </li>
+//               )}
+//               {role === "admin" && (
+//                 <li>
+//                   <NavLink
+//                     className={({ isActive }) =>
+//                       `${
+//                         isActive ? "active-link" : "inactive-link"
+//                       } is-drawer-close tooltip tooltip-right`
+//                     }
+//                     to="/dashboard/admin-dashboard"
+//                   >
+//                     <span className="is-drawer-close:hidden">
+//                       Dashboard
+//                     </span>
+//                   </NavLink>
+//                 </li>
+//               )}
+
+//               <li>
+//                 <button
+//                   onClick={handleSignOut}
+//                   className="text-red-500 font-medium"
+//                 >
+//                   Sign Out
+//                 </button>
+//               </li>
+//             </ul>
+//           </div>
+//         ) : (
+//           <Link className="btn" to="/login">
+//             Login
+//           </Link>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Navbar;
+
+// -------------------
+
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import useHook from "../../../hooks/useHook";
 import useRole from "../../../hooks/useRole";
@@ -5,12 +237,20 @@ import useRole from "../../../hooks/useRole";
 const Navbar = () => {
   const { user, signOutFunc } = useHook();
   const { role } = useRole();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
 
   const handleSignOut = () => {
     signOutFunc()
-      .then(() => {
-        console.log("Signed out");
-      })
+      .then(() => console.log("Signed out"))
       .catch((error) => console.log(error));
   };
 
@@ -59,34 +299,34 @@ const Navbar = () => {
 
       {role === "user" && (
         <>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "active-link" : "inactive-link"
-            }
-            to="/create-issue"
-          >
-            Create Report
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              isActive ? "active-link" : "inactive-link"
-            }
-            to="/staff"
-          >
-            Be a staff
-          </NavLink>
-        </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "active-link" : "inactive-link"
+              }
+              to="/create-issue"
+            >
+              Create Report
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "active-link" : "inactive-link"
+              }
+              to="/staff"
+            >
+              Be a staff
+            </NavLink>
+          </li>
         </>
-        
       )}
     </>
   );
 
   return (
     <div className="navbar bg-base-100 shadow-sm px-4 md:px-6">
+
       {/* Navbar Start */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -108,18 +348,37 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-50"
           >
             {links}
+
+            {/* Theme toggle in mobile dropdown */}
+            <li>
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-2 font-medium text-base-content"
+              >
+                {theme === "light" ? "🌙" : "☀️"}
+                {theme === "light" ? "Dark Mode" : "Light Mode"}
+              </button>
+            </li>
+
+            {!user && (
+              <li>
+                <Link to="/login" className="font-medium text-base-content">
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
+
         <Link
           to="/"
-          className="text-2xl font-bold flex items-center gap-2 ml-2 md:ml-0"
+          className="text-2xl font-bold flex items-center gap-2 ml-2 md:ml-0 text-base-content"
         >
           <img
             className="w-8 h-8"
-            // src="../../../assets/image/logo.png"
             src="https://i.ibb.co.com/s9yzFJsz/logo.png"
             alt="logo"
           />
@@ -128,12 +387,22 @@ const Navbar = () => {
       </div>
 
       {/* Navbar Center */}
-      <div className="navbar-center ml-20  hidden lg:flex">
+      <div className="navbar-center ml-20 hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
 
       {/* Navbar End */}
-      <div className="navbar-end">
+      <div className="navbar-end gap-1">
+
+        {/* Theme toggle button */}
+        <button
+          onClick={toggleTheme}
+          className="btn btn-ghost btn-circle text-xl"
+          aria-label="Toggle theme"
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -146,14 +415,13 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2"
+              className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 mt-2 z-50"
             >
-              <li className="font-semibold text-blue-600">
+              <li className="font-semibold text-primary">
                 {user.displayName}
               </li>
 
-              {/* user Dashboard */}
-
+              {/* User Dashboard */}
               {role === "user" && (
                 <li>
                   <NavLink
@@ -164,14 +432,12 @@ const Navbar = () => {
                     }
                     to="/dashboard/user-dashboard"
                   >
-                    <span className="is-drawer-close:hidden">
-                      Dashboard
-                    </span>
+                    <span className="is-drawer-close:hidden">Dashboard</span>
                   </NavLink>
                 </li>
               )}
 
-              {/* staff Dashboard */}
+              {/* Staff Dashboard */}
               {role === "staff" && (
                 <li>
                   <NavLink
@@ -182,12 +448,12 @@ const Navbar = () => {
                     }
                     to="/dashboard/staff-dashboard"
                   >
-                    <span className="is-drawer-close:hidden">
-                      Dashboard
-                    </span>
+                    <span className="is-drawer-close:hidden">Dashboard</span>
                   </NavLink>
                 </li>
               )}
+
+              {/* Admin Dashboard */}
               {role === "admin" && (
                 <li>
                   <NavLink
@@ -198,9 +464,7 @@ const Navbar = () => {
                     }
                     to="/dashboard/admin-dashboard"
                   >
-                    <span className="is-drawer-close:hidden">
-                      Dashboard
-                    </span>
+                    <span className="is-drawer-close:hidden">Dashboard</span>
                   </NavLink>
                 </li>
               )}
@@ -208,7 +472,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={handleSignOut}
-                  className="text-red-500 font-medium"
+                  className="text-error font-medium"
                 >
                   Sign Out
                 </button>
@@ -216,7 +480,7 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <Link className="btn" to="/login">
+          <Link className="btn hidden sm:flex" to="/login">
             Login
           </Link>
         )}

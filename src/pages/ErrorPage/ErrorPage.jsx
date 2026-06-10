@@ -11,7 +11,7 @@ const ErrorPage = () => {
         The route you are requesting is not found on our system. please try a
         different route
       </p>
-      <button className=" bg-linear-to-r font-medium from-green-700  to-green-400 text-white py-3 px-8 rounded-lg mt-6 cursor-pointer">
+      <button className=" bg-linear-to-r font-medium from-green-700  to-green-400 text-base-100 py-3 px-8 rounded-lg mt-6 cursor-pointer">
         {" "}
         <Link to="/">Go Back!</Link>
       </button>

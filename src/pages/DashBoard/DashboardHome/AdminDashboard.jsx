@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-    Bar,
-    BarChart,
-    Cell,
-    Pie,
-    PieChart,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis,
+  Bar,
+  BarChart,
+  Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
 } from "recharts";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
@@ -54,10 +54,10 @@ const AdminDashboard = () => {
   const highPriorityUsers = data.highPriorityUsers || [];
 
   return (
-    <div className="p-6 bg-gradient-to-br from-slate-100 to-slate-200 min-h-screen space-y-10">
+    <div className="p-6 bg-base-100 min-h-screen space-y-10">
 
       
-      <div className="flex items-center gap-5 bg-white p-6 rounded-2xl shadow mb-8">
+      <div className="flex items-center gap-5 bg-base-100 p-6 rounded-2xl shadow mb-8">
         <img
           src={data.admin?.photoURL || "/avatar.png"}
           className="w-16 h-16 rounded-full border"
@@ -121,7 +121,7 @@ const AdminDashboard = () => {
       </div>
 
       
-      <div className="bg-white p-6 rounded-2xl shadow">
+      <div className="bg-base-100 p-6 rounded-2xl shadow">
         <div className="flex justify-between mb-4">
           <h2 className="text-xl font-bold text-red-600"> High Priority Users</h2>
           <span className="text-xs bg-red-100 text-red-600 px-3 py-1 rounded-full">Profile & Report Boost</span>
@@ -133,7 +133,7 @@ const AdminDashboard = () => {
           <div className="overflow-x-auto">
             <table className="table w-full">
               <thead>
-                <tr className="bg-gray-100">
+                <tr className="bg-base-100">
                   <th>#</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -144,8 +144,8 @@ const AdminDashboard = () => {
                 {highPriorityUsers.map((user, i) => (
                   <tr key={i} className="hover:bg-gray-50">
                     <td>{i + 1}</td>
-                    <td>{user.name || "N/A"}</td>
-                    <td>{user.email}</td>
+                    <td className="text-slate-700">{user.name || "N/A"}</td>
+                    <td className="text-slate-700">{user.email}</td>
                     <td className="font-bold text-red-500 text-center">{user.totalReports}</td>
                   </tr>
                 ))}
@@ -159,14 +159,14 @@ const AdminDashboard = () => {
 };
 
 const Stat = ({ title, value }) => (
-  <div className="bg-white p-6 rounded-2xl shadow text-center hover:scale-105 transition">
+  <div className="bg-base-100 p-6 rounded-2xl shadow text-center hover:scale-105 transition">
     <p className="text-gray-500 text-sm">{title}</p>
     <h3 className="text-2xl font-bold mt-2">{value ?? 0}</h3>
   </div>
 );
 
 const ChartBox = ({ title, children }) => (
-  <div className="bg-white p-6 rounded-2xl shadow">
+  <div className="bg-base-100 p-6 rounded-2xl shadow">
     <h2 className="font-semibold mb-4">{title}</h2>
     <ResponsiveContainer width="100%" height={320}>
       {children}

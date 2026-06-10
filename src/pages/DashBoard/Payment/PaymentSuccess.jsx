@@ -23,7 +23,7 @@ const PaymentSuccess = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md sm:max-w-lg bg-white rounded-xl shadow-md p-6 sm:p-8">
+      <div className="w-full max-w-md sm:max-w-lg bg-base-100rounded-xl shadow-md p-6 sm:p-8">
         
         
         <div className="flex justify-center mb-4">
@@ -70,7 +70,7 @@ const PaymentSuccess = () => {
         <div className="mt-8">
           <button
             onClick={() => window.location.href = "/"}
-            className="w-full py-2.5 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 transition"
+            className="w-full py-2.5 rounded-lg bg-green-600 text-base-100 font-medium hover:bg-green-700 transition"
           >
             Go to Home
           </button>

@@ -31,7 +31,7 @@ const Staff = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row items-center justify-center p-4 md:p-10">
+    <div className="min-h-screen bg-base-100 flex flex-col md:flex-row items-center justify-center p-4 md:p-10">
      
       <div className="hidden md:flex md:w-1/2 items-center justify-center">
         <img
@@ -43,7 +43,7 @@ const Staff = () => {
 
       {/* Form */}
       <div className="w-full md:w-1/2 px-4 md:px-10">
-        <h2 className="text-3xl md:text-4xl text-center font-bold text-gray-800 mb-4 md:text-left">
+        <h2 className="text-3xl md:text-4xl text-center font-bold text-base-content mb-4 md:text-left">
           Become a Staff
         </h2>
         <p className="text-gray-500 mb-6 text-center md:text-left">
@@ -53,7 +53,7 @@ const Staff = () => {
         <form onSubmit={handleSubmit(handleStaff)} className="space-y-5">
           {/* Name */}
           <div>
-            <label className="block text-gray-700 mb-1 font-medium">Name</label>
+            <label className="block text-base-content mb-1 font-medium">Name</label>
             <input
               type="text"
               {...register("name", { required: true })}
@@ -67,7 +67,7 @@ const Staff = () => {
 
           {/* Email */}
           <div>
-            <label className="block text-gray-700 mb-1 font-medium">Email</label>
+            <label className="block text-base-content mb-1 font-medium">Email</label>
             <input
               type="email"
               {...register("email", { required: true })}
@@ -81,7 +81,7 @@ const Staff = () => {
 
           {/* Image */}
           <div>
-            <label className="block text-gray-700 mb-1 font-medium">Image</label>
+            <label className="block text-base-content mb-1 font-medium">Image</label>
             <input
               type="file"
               className="file-input file-input-ghost w-full"
@@ -94,7 +94,7 @@ const Staff = () => {
 
           {/* Address */}
           <div>
-            <label className="block text-gray-700 mb-1 font-medium">Address</label>
+            <label className="block text-base-content mb-1 font-medium">Address</label>
             <input
               type="text"
               {...register("address", { required: true })}
@@ -110,7 +110,7 @@ const Staff = () => {
           <div>
             <button
               type="submit"
-              className="w-full py-3.5 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition"
+              className="w-full py-3.5 bg-cyan-500 hover:bg-cyan-600 text-base-100 font-semibold rounded-lg transition"
             >
               Register as Staff
             </button>

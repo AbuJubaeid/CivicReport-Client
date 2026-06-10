@@ -58,9 +58,9 @@ const ReportDetailPage = () => {
         </h2>
 
         <div className="flex flex-col gap-6">
-          
+
           {/* image card */}
-          <div className="bg-white shadow-md rounded-xl overflow-hidden">
+          <div className="bg-base-100shadow-md rounded-xl overflow-hidden">
             <img
               src={
                 report.photoURL || "https://placehold.co/800x500?text=No+Image"
@@ -71,7 +71,7 @@ const ReportDetailPage = () => {
           </div>
 
           {/* info card */}
-          <div className="bg-white shadow-md rounded-xl p-6 md:p-8">
+          <div className="bg-base-100shadow-md rounded-xl p-6 md:p-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <h5 className="font-semibold text-lg">Reporter Name</h5>
